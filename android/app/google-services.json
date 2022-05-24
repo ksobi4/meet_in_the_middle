@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1084899582953",
+    "firebase_url": "https://meet-in-the-middle-2-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "meet-in-the-middle-2",
+    "storage_bucket": "meet-in-the-middle-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084899582953:android:05f9d63ba0ca66fd836178",
+        "android_client_info": {
+          "package_name": "com.example.mitm3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084899582953-mg0rl0ha9ifs3elt80pnbcrok5237oq4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn-hCe_HBTIN7_KVrKwpbfhATVJDdxFSY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084899582953-mg0rl0ha9ifs3elt80pnbcrok5237oq4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
