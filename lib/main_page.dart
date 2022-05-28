@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'core/widgets/custom_animated_bottom_bar.dart';
+import 'features/chat/presentation/chat_home_page.dart';
 import 'features/chat/presentation/chat_page.dart';
 import 'features/chat/presentation/home_page.dart';
 import 'features/delay/presentation/delay_page.dart';
