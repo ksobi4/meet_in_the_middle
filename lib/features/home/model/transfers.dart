@@ -30,7 +30,7 @@ class Transfers {
 
 @JsonSerializable(explicitToJson: true)
 class Transfer {
-  List<Ride> trains;
+  List<Train> trains;
   Transfer({
     required this.trains,
   });
@@ -43,7 +43,7 @@ class Transfer {
 
   factory Transfer.fromMap(Map<String, dynamic> map) {
     return Transfer(
-      trains: List<Ride>.from(map['trains']?.map((x) => Ride.fromMap(x))),
+      trains: List<Train>.from(map['trains']?.map((x) => Train.fromMap(x))),
     );
   }
 
@@ -54,7 +54,7 @@ class Transfer {
 }
 
 @JsonSerializable(explicitToJson: true)
-class Ride {
+class Train {
   String distance;
   String startStation;
   String endStation;
@@ -63,8 +63,9 @@ class Ride {
   String carrier;
   String name;
   String number;
+  String date;
 
-  Ride({
+  Train({
     this.distance = '',
     this.startStation = '',
     this.endStation = '',
@@ -73,6 +74,7 @@ class Ride {
     this.carrier = '',
     this.name = '',
     this.number = '',
+    this.date = '',
   });
 
   Map<String, dynamic> toMap() {
@@ -85,11 +87,12 @@ class Ride {
       'carrier': carrier,
       'name': name,
       'number': number,
+      'date': date,
     };
   }
 
-  factory Ride.fromMap(Map<String, dynamic> map) {
-    return Ride(
+  factory Train.fromMap(Map<String, dynamic> map) {
+    return Train(
       distance: map['distance'] ?? '',
       startStation: map['startStation'] ?? '',
       endStation: map['endStation'] ?? '',
@@ -98,10 +101,11 @@ class Ride {
       carrier: map['carrier'] ?? '',
       name: map['name'] ?? '',
       number: map['number'] ?? '',
+      date: map['date'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Ride.fromJson(String source) => Ride.fromMap(json.decode(source));
+  factory Train.fromJson(String source) => Train.fromMap(json.decode(source));
 }

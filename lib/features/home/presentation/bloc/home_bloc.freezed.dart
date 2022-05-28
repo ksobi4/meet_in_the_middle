@@ -22,6 +22,7 @@ mixin _$HomeEvent {
             String startStation, String endStation, String date, String time)
         searchTransfers,
     required TResult Function(String stringPart) searchStation,
+    required TResult Function(Train train) getEventsAndMembers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$HomeEvent {
             String startStation, String endStation, String date, String time)?
         searchTransfers,
     TResult Function(String stringPart)? searchStation,
+    TResult Function(Train train)? getEventsAndMembers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$HomeEvent {
             String startStation, String endStation, String date, String time)?
         searchTransfers,
     TResult Function(String stringPart)? searchStation,
+    TResult Function(Train train)? getEventsAndMembers,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,18 +48,22 @@ mixin _$HomeEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(HomeSearchTransfers value) searchTransfers,
     required TResult Function(HomeSearchStation value) searchStation,
+    required TResult Function(HomeEventGetEventsAndMembers value)
+        getEventsAndMembers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(HomeSearchTransfers value)? searchTransfers,
     TResult Function(HomeSearchStation value)? searchStation,
+    TResult Function(HomeEventGetEventsAndMembers value)? getEventsAndMembers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HomeSearchTransfers value)? searchTransfers,
     TResult Function(HomeSearchStation value)? searchStation,
+    TResult Function(HomeEventGetEventsAndMembers value)? getEventsAndMembers,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -178,6 +185,7 @@ class _$HomeSearchTransfers implements HomeSearchTransfers {
             String startStation, String endStation, String date, String time)
         searchTransfers,
     required TResult Function(String stringPart) searchStation,
+    required TResult Function(Train train) getEventsAndMembers,
   }) {
     return searchTransfers(startStation, endStation, date, time);
   }
@@ -189,6 +197,7 @@ class _$HomeSearchTransfers implements HomeSearchTransfers {
             String startStation, String endStation, String date, String time)?
         searchTransfers,
     TResult Function(String stringPart)? searchStation,
+    TResult Function(Train train)? getEventsAndMembers,
   }) {
     return searchTransfers?.call(startStation, endStation, date, time);
   }
@@ -200,6 +209,7 @@ class _$HomeSearchTransfers implements HomeSearchTransfers {
             String startStation, String endStation, String date, String time)?
         searchTransfers,
     TResult Function(String stringPart)? searchStation,
+    TResult Function(Train train)? getEventsAndMembers,
     required TResult orElse(),
   }) {
     if (searchTransfers != null) {
@@ -213,6 +223,8 @@ class _$HomeSearchTransfers implements HomeSearchTransfers {
   TResult map<TResult extends Object?>({
     required TResult Function(HomeSearchTransfers value) searchTransfers,
     required TResult Function(HomeSearchStation value) searchStation,
+    required TResult Function(HomeEventGetEventsAndMembers value)
+        getEventsAndMembers,
   }) {
     return searchTransfers(this);
   }
@@ -222,6 +234,7 @@ class _$HomeSearchTransfers implements HomeSearchTransfers {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(HomeSearchTransfers value)? searchTransfers,
     TResult Function(HomeSearchStation value)? searchStation,
+    TResult Function(HomeEventGetEventsAndMembers value)? getEventsAndMembers,
   }) {
     return searchTransfers?.call(this);
   }
@@ -231,6 +244,7 @@ class _$HomeSearchTransfers implements HomeSearchTransfers {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HomeSearchTransfers value)? searchTransfers,
     TResult Function(HomeSearchStation value)? searchStation,
+    TResult Function(HomeEventGetEventsAndMembers value)? getEventsAndMembers,
     required TResult orElse(),
   }) {
     if (searchTransfers != null) {
@@ -326,6 +340,7 @@ class _$HomeSearchStation implements HomeSearchStation {
             String startStation, String endStation, String date, String time)
         searchTransfers,
     required TResult Function(String stringPart) searchStation,
+    required TResult Function(Train train) getEventsAndMembers,
   }) {
     return searchStation(stringPart);
   }
@@ -337,6 +352,7 @@ class _$HomeSearchStation implements HomeSearchStation {
             String startStation, String endStation, String date, String time)?
         searchTransfers,
     TResult Function(String stringPart)? searchStation,
+    TResult Function(Train train)? getEventsAndMembers,
   }) {
     return searchStation?.call(stringPart);
   }
@@ -348,6 +364,7 @@ class _$HomeSearchStation implements HomeSearchStation {
             String startStation, String endStation, String date, String time)?
         searchTransfers,
     TResult Function(String stringPart)? searchStation,
+    TResult Function(Train train)? getEventsAndMembers,
     required TResult orElse(),
   }) {
     if (searchStation != null) {
@@ -361,6 +378,8 @@ class _$HomeSearchStation implements HomeSearchStation {
   TResult map<TResult extends Object?>({
     required TResult Function(HomeSearchTransfers value) searchTransfers,
     required TResult Function(HomeSearchStation value) searchStation,
+    required TResult Function(HomeEventGetEventsAndMembers value)
+        getEventsAndMembers,
   }) {
     return searchStation(this);
   }
@@ -370,6 +389,7 @@ class _$HomeSearchStation implements HomeSearchStation {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(HomeSearchTransfers value)? searchTransfers,
     TResult Function(HomeSearchStation value)? searchStation,
+    TResult Function(HomeEventGetEventsAndMembers value)? getEventsAndMembers,
   }) {
     return searchStation?.call(this);
   }
@@ -379,6 +399,7 @@ class _$HomeSearchStation implements HomeSearchStation {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HomeSearchTransfers value)? searchTransfers,
     TResult Function(HomeSearchStation value)? searchStation,
+    TResult Function(HomeEventGetEventsAndMembers value)? getEventsAndMembers,
     required TResult orElse(),
   }) {
     if (searchStation != null) {
@@ -399,6 +420,158 @@ abstract class HomeSearchStation implements HomeEvent {
 }
 
 /// @nodoc
+abstract class _$$HomeEventGetEventsAndMembersCopyWith<$Res> {
+  factory _$$HomeEventGetEventsAndMembersCopyWith(
+          _$HomeEventGetEventsAndMembers value,
+          $Res Function(_$HomeEventGetEventsAndMembers) then) =
+      __$$HomeEventGetEventsAndMembersCopyWithImpl<$Res>;
+  $Res call({Train train});
+}
+
+/// @nodoc
+class __$$HomeEventGetEventsAndMembersCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res>
+    implements _$$HomeEventGetEventsAndMembersCopyWith<$Res> {
+  __$$HomeEventGetEventsAndMembersCopyWithImpl(
+      _$HomeEventGetEventsAndMembers _value,
+      $Res Function(_$HomeEventGetEventsAndMembers) _then)
+      : super(_value, (v) => _then(v as _$HomeEventGetEventsAndMembers));
+
+  @override
+  _$HomeEventGetEventsAndMembers get _value =>
+      super._value as _$HomeEventGetEventsAndMembers;
+
+  @override
+  $Res call({
+    Object? train = freezed,
+  }) {
+    return _then(_$HomeEventGetEventsAndMembers(
+      train == freezed
+          ? _value.train
+          : train // ignore: cast_nullable_to_non_nullable
+              as Train,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$HomeEventGetEventsAndMembers implements HomeEventGetEventsAndMembers {
+  const _$HomeEventGetEventsAndMembers(this.train);
+
+  @override
+  final Train train;
+
+  @override
+  String toString() {
+    return 'HomeEvent.getEventsAndMembers(train: $train)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HomeEventGetEventsAndMembers &&
+            const DeepCollectionEquality().equals(other.train, train));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(train));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$HomeEventGetEventsAndMembersCopyWith<_$HomeEventGetEventsAndMembers>
+      get copyWith => __$$HomeEventGetEventsAndMembersCopyWithImpl<
+          _$HomeEventGetEventsAndMembers>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String startStation, String endStation, String date, String time)
+        searchTransfers,
+    required TResult Function(String stringPart) searchStation,
+    required TResult Function(Train train) getEventsAndMembers,
+  }) {
+    return getEventsAndMembers(train);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(
+            String startStation, String endStation, String date, String time)?
+        searchTransfers,
+    TResult Function(String stringPart)? searchStation,
+    TResult Function(Train train)? getEventsAndMembers,
+  }) {
+    return getEventsAndMembers?.call(train);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String startStation, String endStation, String date, String time)?
+        searchTransfers,
+    TResult Function(String stringPart)? searchStation,
+    TResult Function(Train train)? getEventsAndMembers,
+    required TResult orElse(),
+  }) {
+    if (getEventsAndMembers != null) {
+      return getEventsAndMembers(train);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HomeSearchTransfers value) searchTransfers,
+    required TResult Function(HomeSearchStation value) searchStation,
+    required TResult Function(HomeEventGetEventsAndMembers value)
+        getEventsAndMembers,
+  }) {
+    return getEventsAndMembers(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(HomeSearchTransfers value)? searchTransfers,
+    TResult Function(HomeSearchStation value)? searchStation,
+    TResult Function(HomeEventGetEventsAndMembers value)? getEventsAndMembers,
+  }) {
+    return getEventsAndMembers?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HomeSearchTransfers value)? searchTransfers,
+    TResult Function(HomeSearchStation value)? searchStation,
+    TResult Function(HomeEventGetEventsAndMembers value)? getEventsAndMembers,
+    required TResult orElse(),
+  }) {
+    if (getEventsAndMembers != null) {
+      return getEventsAndMembers(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class HomeEventGetEventsAndMembers implements HomeEvent {
+  const factory HomeEventGetEventsAndMembers(final Train train) =
+      _$HomeEventGetEventsAndMembers;
+
+  Train get train => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$HomeEventGetEventsAndMembersCopyWith<_$HomeEventGetEventsAndMembers>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -410,6 +583,9 @@ mixin _$HomeState {
     required TResult Function() loadingSearchStaion,
     required TResult Function(List<String> list) loadedSearchStation,
     required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -422,6 +598,9 @@ mixin _$HomeState {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -434,6 +613,9 @@ mixin _$HomeState {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -451,6 +633,12 @@ mixin _$HomeState {
         loadedSearchStation,
     required TResult Function(HomeStateErrorSearchStation value)
         errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -463,6 +651,12 @@ mixin _$HomeState {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -475,6 +669,12 @@ mixin _$HomeState {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -543,6 +743,9 @@ class _$HomeStateInit implements HomeStateInit {
     required TResult Function() loadingSearchStaion,
     required TResult Function(List<String> list) loadedSearchStation,
     required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
   }) {
     return init();
   }
@@ -558,6 +761,9 @@ class _$HomeStateInit implements HomeStateInit {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
   }) {
     return init?.call();
   }
@@ -573,6 +779,9 @@ class _$HomeStateInit implements HomeStateInit {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -596,6 +805,12 @@ class _$HomeStateInit implements HomeStateInit {
         loadedSearchStation,
     required TResult Function(HomeStateErrorSearchStation value)
         errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
   }) {
     return init(this);
   }
@@ -611,6 +826,12 @@ class _$HomeStateInit implements HomeStateInit {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
   }) {
     return init?.call(this);
   }
@@ -626,6 +847,12 @@ class _$HomeStateInit implements HomeStateInit {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -688,6 +915,9 @@ class _$HomeStateLoading implements HomeStateLoading {
     required TResult Function() loadingSearchStaion,
     required TResult Function(List<String> list) loadedSearchStation,
     required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
   }) {
     return loading();
   }
@@ -703,6 +933,9 @@ class _$HomeStateLoading implements HomeStateLoading {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
   }) {
     return loading?.call();
   }
@@ -718,6 +951,9 @@ class _$HomeStateLoading implements HomeStateLoading {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -741,6 +977,12 @@ class _$HomeStateLoading implements HomeStateLoading {
         loadedSearchStation,
     required TResult Function(HomeStateErrorSearchStation value)
         errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
   }) {
     return loading(this);
   }
@@ -756,6 +998,12 @@ class _$HomeStateLoading implements HomeStateLoading {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
   }) {
     return loading?.call(this);
   }
@@ -771,6 +1019,12 @@ class _$HomeStateLoading implements HomeStateLoading {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -857,6 +1111,9 @@ class _$HomeStateLoaded implements HomeStateLoaded {
     required TResult Function() loadingSearchStaion,
     required TResult Function(List<String> list) loadedSearchStation,
     required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
   }) {
     return loaded(transfers);
   }
@@ -872,6 +1129,9 @@ class _$HomeStateLoaded implements HomeStateLoaded {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
   }) {
     return loaded?.call(transfers);
   }
@@ -887,6 +1147,9 @@ class _$HomeStateLoaded implements HomeStateLoaded {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -910,6 +1173,12 @@ class _$HomeStateLoaded implements HomeStateLoaded {
         loadedSearchStation,
     required TResult Function(HomeStateErrorSearchStation value)
         errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
   }) {
     return loaded(this);
   }
@@ -925,6 +1194,12 @@ class _$HomeStateLoaded implements HomeStateLoaded {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
   }) {
     return loaded?.call(this);
   }
@@ -940,6 +1215,12 @@ class _$HomeStateLoaded implements HomeStateLoaded {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1030,6 +1311,9 @@ class _$HomeStateError implements HomeStateError {
     required TResult Function() loadingSearchStaion,
     required TResult Function(List<String> list) loadedSearchStation,
     required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
   }) {
     return error(message);
   }
@@ -1045,6 +1329,9 @@ class _$HomeStateError implements HomeStateError {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
   }) {
     return error?.call(message);
   }
@@ -1060,6 +1347,9 @@ class _$HomeStateError implements HomeStateError {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1083,6 +1373,12 @@ class _$HomeStateError implements HomeStateError {
         loadedSearchStation,
     required TResult Function(HomeStateErrorSearchStation value)
         errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
   }) {
     return error(this);
   }
@@ -1098,6 +1394,12 @@ class _$HomeStateError implements HomeStateError {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
   }) {
     return error?.call(this);
   }
@@ -1113,6 +1415,12 @@ class _$HomeStateError implements HomeStateError {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1184,6 +1492,9 @@ class _$HomeStateInitSearchStation implements HomeStateInitSearchStation {
     required TResult Function() loadingSearchStaion,
     required TResult Function(List<String> list) loadedSearchStation,
     required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
   }) {
     return initSearchStation();
   }
@@ -1199,6 +1510,9 @@ class _$HomeStateInitSearchStation implements HomeStateInitSearchStation {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
   }) {
     return initSearchStation?.call();
   }
@@ -1214,6 +1528,9 @@ class _$HomeStateInitSearchStation implements HomeStateInitSearchStation {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (initSearchStation != null) {
@@ -1237,6 +1554,12 @@ class _$HomeStateInitSearchStation implements HomeStateInitSearchStation {
         loadedSearchStation,
     required TResult Function(HomeStateErrorSearchStation value)
         errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
   }) {
     return initSearchStation(this);
   }
@@ -1252,6 +1575,12 @@ class _$HomeStateInitSearchStation implements HomeStateInitSearchStation {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
   }) {
     return initSearchStation?.call(this);
   }
@@ -1267,6 +1596,12 @@ class _$HomeStateInitSearchStation implements HomeStateInitSearchStation {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (initSearchStation != null) {
@@ -1333,6 +1668,9 @@ class _$HomeStateLoadingSearchStation implements HomeStateLoadingSearchStation {
     required TResult Function() loadingSearchStaion,
     required TResult Function(List<String> list) loadedSearchStation,
     required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
   }) {
     return loadingSearchStaion();
   }
@@ -1348,6 +1686,9 @@ class _$HomeStateLoadingSearchStation implements HomeStateLoadingSearchStation {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
   }) {
     return loadingSearchStaion?.call();
   }
@@ -1363,6 +1704,9 @@ class _$HomeStateLoadingSearchStation implements HomeStateLoadingSearchStation {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (loadingSearchStaion != null) {
@@ -1386,6 +1730,12 @@ class _$HomeStateLoadingSearchStation implements HomeStateLoadingSearchStation {
         loadedSearchStation,
     required TResult Function(HomeStateErrorSearchStation value)
         errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
   }) {
     return loadingSearchStaion(this);
   }
@@ -1401,6 +1751,12 @@ class _$HomeStateLoadingSearchStation implements HomeStateLoadingSearchStation {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
   }) {
     return loadingSearchStaion?.call(this);
   }
@@ -1416,6 +1772,12 @@ class _$HomeStateLoadingSearchStation implements HomeStateLoadingSearchStation {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (loadingSearchStaion != null) {
@@ -1511,6 +1873,9 @@ class _$HomeStateLoadedSearchStation implements HomeStateLoadedSearchStation {
     required TResult Function() loadingSearchStaion,
     required TResult Function(List<String> list) loadedSearchStation,
     required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
   }) {
     return loadedSearchStation(list);
   }
@@ -1526,6 +1891,9 @@ class _$HomeStateLoadedSearchStation implements HomeStateLoadedSearchStation {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
   }) {
     return loadedSearchStation?.call(list);
   }
@@ -1541,6 +1909,9 @@ class _$HomeStateLoadedSearchStation implements HomeStateLoadedSearchStation {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (loadedSearchStation != null) {
@@ -1564,6 +1935,12 @@ class _$HomeStateLoadedSearchStation implements HomeStateLoadedSearchStation {
         loadedSearchStation,
     required TResult Function(HomeStateErrorSearchStation value)
         errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
   }) {
     return loadedSearchStation(this);
   }
@@ -1579,6 +1956,12 @@ class _$HomeStateLoadedSearchStation implements HomeStateLoadedSearchStation {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
   }) {
     return loadedSearchStation?.call(this);
   }
@@ -1594,6 +1977,12 @@ class _$HomeStateLoadedSearchStation implements HomeStateLoadedSearchStation {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (loadedSearchStation != null) {
@@ -1690,6 +2079,9 @@ class _$HomeStateErrorSearchStation implements HomeStateErrorSearchStation {
     required TResult Function() loadingSearchStaion,
     required TResult Function(List<String> list) loadedSearchStation,
     required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
   }) {
     return errorSearchStation(message);
   }
@@ -1705,6 +2097,9 @@ class _$HomeStateErrorSearchStation implements HomeStateErrorSearchStation {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
   }) {
     return errorSearchStation?.call(message);
   }
@@ -1720,6 +2115,9 @@ class _$HomeStateErrorSearchStation implements HomeStateErrorSearchStation {
     TResult Function()? loadingSearchStaion,
     TResult Function(List<String> list)? loadedSearchStation,
     TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (errorSearchStation != null) {
@@ -1743,6 +2141,12 @@ class _$HomeStateErrorSearchStation implements HomeStateErrorSearchStation {
         loadedSearchStation,
     required TResult Function(HomeStateErrorSearchStation value)
         errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
   }) {
     return errorSearchStation(this);
   }
@@ -1758,6 +2162,12 @@ class _$HomeStateErrorSearchStation implements HomeStateErrorSearchStation {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
   }) {
     return errorSearchStation?.call(this);
   }
@@ -1773,6 +2183,12 @@ class _$HomeStateErrorSearchStation implements HomeStateErrorSearchStation {
     TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
     TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
     TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
     required TResult orElse(),
   }) {
     if (errorSearchStation != null) {
@@ -1790,4 +2206,538 @@ abstract class HomeStateErrorSearchStation implements HomeState {
   @JsonKey(ignore: true)
   _$$HomeStateErrorSearchStationCopyWith<_$HomeStateErrorSearchStation>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$HomeStateInitGetEventsAndMembersCopyWith<$Res> {
+  factory _$$HomeStateInitGetEventsAndMembersCopyWith(
+          _$HomeStateInitGetEventsAndMembers value,
+          $Res Function(_$HomeStateInitGetEventsAndMembers) then) =
+      __$$HomeStateInitGetEventsAndMembersCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$HomeStateInitGetEventsAndMembersCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res>
+    implements _$$HomeStateInitGetEventsAndMembersCopyWith<$Res> {
+  __$$HomeStateInitGetEventsAndMembersCopyWithImpl(
+      _$HomeStateInitGetEventsAndMembers _value,
+      $Res Function(_$HomeStateInitGetEventsAndMembers) _then)
+      : super(_value, (v) => _then(v as _$HomeStateInitGetEventsAndMembers));
+
+  @override
+  _$HomeStateInitGetEventsAndMembers get _value =>
+      super._value as _$HomeStateInitGetEventsAndMembers;
+}
+
+/// @nodoc
+
+class _$HomeStateInitGetEventsAndMembers
+    implements HomeStateInitGetEventsAndMembers {
+  const _$HomeStateInitGetEventsAndMembers();
+
+  @override
+  String toString() {
+    return 'HomeState.initGetEventsAndMembers()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HomeStateInitGetEventsAndMembers);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function(Transfers transfers) loaded,
+    required TResult Function(String message) error,
+    required TResult Function() initSearchStation,
+    required TResult Function() loadingSearchStaion,
+    required TResult Function(List<String> list) loadedSearchStation,
+    required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
+  }) {
+    return initGetEventsAndMembers();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(Transfers transfers)? loaded,
+    TResult Function(String message)? error,
+    TResult Function()? initSearchStation,
+    TResult Function()? loadingSearchStaion,
+    TResult Function(List<String> list)? loadedSearchStation,
+    TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
+  }) {
+    return initGetEventsAndMembers?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(Transfers transfers)? loaded,
+    TResult Function(String message)? error,
+    TResult Function()? initSearchStation,
+    TResult Function()? loadingSearchStaion,
+    TResult Function(List<String> list)? loadedSearchStation,
+    TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
+    required TResult orElse(),
+  }) {
+    if (initGetEventsAndMembers != null) {
+      return initGetEventsAndMembers();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HomeStateInit value) init,
+    required TResult Function(HomeStateLoading value) loading,
+    required TResult Function(HomeStateLoaded value) loaded,
+    required TResult Function(HomeStateError value) error,
+    required TResult Function(HomeStateInitSearchStation value)
+        initSearchStation,
+    required TResult Function(HomeStateLoadingSearchStation value)
+        loadingSearchStaion,
+    required TResult Function(HomeStateLoadedSearchStation value)
+        loadedSearchStation,
+    required TResult Function(HomeStateErrorSearchStation value)
+        errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
+  }) {
+    return initGetEventsAndMembers(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(HomeStateInit value)? init,
+    TResult Function(HomeStateLoading value)? loading,
+    TResult Function(HomeStateLoaded value)? loaded,
+    TResult Function(HomeStateError value)? error,
+    TResult Function(HomeStateInitSearchStation value)? initSearchStation,
+    TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
+    TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
+    TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
+  }) {
+    return initGetEventsAndMembers?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HomeStateInit value)? init,
+    TResult Function(HomeStateLoading value)? loading,
+    TResult Function(HomeStateLoaded value)? loaded,
+    TResult Function(HomeStateError value)? error,
+    TResult Function(HomeStateInitSearchStation value)? initSearchStation,
+    TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
+    TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
+    TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
+    required TResult orElse(),
+  }) {
+    if (initGetEventsAndMembers != null) {
+      return initGetEventsAndMembers(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class HomeStateInitGetEventsAndMembers implements HomeState {
+  const factory HomeStateInitGetEventsAndMembers() =
+      _$HomeStateInitGetEventsAndMembers;
+}
+
+/// @nodoc
+abstract class _$$HomeStateLoadingGetEventsAndMembersCopyWith<$Res> {
+  factory _$$HomeStateLoadingGetEventsAndMembersCopyWith(
+          _$HomeStateLoadingGetEventsAndMembers value,
+          $Res Function(_$HomeStateLoadingGetEventsAndMembers) then) =
+      __$$HomeStateLoadingGetEventsAndMembersCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$HomeStateLoadingGetEventsAndMembersCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res>
+    implements _$$HomeStateLoadingGetEventsAndMembersCopyWith<$Res> {
+  __$$HomeStateLoadingGetEventsAndMembersCopyWithImpl(
+      _$HomeStateLoadingGetEventsAndMembers _value,
+      $Res Function(_$HomeStateLoadingGetEventsAndMembers) _then)
+      : super(_value, (v) => _then(v as _$HomeStateLoadingGetEventsAndMembers));
+
+  @override
+  _$HomeStateLoadingGetEventsAndMembers get _value =>
+      super._value as _$HomeStateLoadingGetEventsAndMembers;
+}
+
+/// @nodoc
+
+class _$HomeStateLoadingGetEventsAndMembers
+    implements HomeStateLoadingGetEventsAndMembers {
+  const _$HomeStateLoadingGetEventsAndMembers();
+
+  @override
+  String toString() {
+    return 'HomeState.loadingGetEventsAndMembers()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HomeStateLoadingGetEventsAndMembers);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function(Transfers transfers) loaded,
+    required TResult Function(String message) error,
+    required TResult Function() initSearchStation,
+    required TResult Function() loadingSearchStaion,
+    required TResult Function(List<String> list) loadedSearchStation,
+    required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
+  }) {
+    return loadingGetEventsAndMembers();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(Transfers transfers)? loaded,
+    TResult Function(String message)? error,
+    TResult Function()? initSearchStation,
+    TResult Function()? loadingSearchStaion,
+    TResult Function(List<String> list)? loadedSearchStation,
+    TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
+  }) {
+    return loadingGetEventsAndMembers?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(Transfers transfers)? loaded,
+    TResult Function(String message)? error,
+    TResult Function()? initSearchStation,
+    TResult Function()? loadingSearchStaion,
+    TResult Function(List<String> list)? loadedSearchStation,
+    TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
+    required TResult orElse(),
+  }) {
+    if (loadingGetEventsAndMembers != null) {
+      return loadingGetEventsAndMembers();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HomeStateInit value) init,
+    required TResult Function(HomeStateLoading value) loading,
+    required TResult Function(HomeStateLoaded value) loaded,
+    required TResult Function(HomeStateError value) error,
+    required TResult Function(HomeStateInitSearchStation value)
+        initSearchStation,
+    required TResult Function(HomeStateLoadingSearchStation value)
+        loadingSearchStaion,
+    required TResult Function(HomeStateLoadedSearchStation value)
+        loadedSearchStation,
+    required TResult Function(HomeStateErrorSearchStation value)
+        errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
+  }) {
+    return loadingGetEventsAndMembers(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(HomeStateInit value)? init,
+    TResult Function(HomeStateLoading value)? loading,
+    TResult Function(HomeStateLoaded value)? loaded,
+    TResult Function(HomeStateError value)? error,
+    TResult Function(HomeStateInitSearchStation value)? initSearchStation,
+    TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
+    TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
+    TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
+  }) {
+    return loadingGetEventsAndMembers?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HomeStateInit value)? init,
+    TResult Function(HomeStateLoading value)? loading,
+    TResult Function(HomeStateLoaded value)? loaded,
+    TResult Function(HomeStateError value)? error,
+    TResult Function(HomeStateInitSearchStation value)? initSearchStation,
+    TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
+    TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
+    TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
+    required TResult orElse(),
+  }) {
+    if (loadingGetEventsAndMembers != null) {
+      return loadingGetEventsAndMembers(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class HomeStateLoadingGetEventsAndMembers implements HomeState {
+  const factory HomeStateLoadingGetEventsAndMembers() =
+      _$HomeStateLoadingGetEventsAndMembers;
+}
+
+/// @nodoc
+abstract class _$$HomeStateLoadedGetEventsAndMembersCopyWith<$Res> {
+  factory _$$HomeStateLoadedGetEventsAndMembersCopyWith(
+          _$HomeStateLoadedGetEventsAndMembers value,
+          $Res Function(_$HomeStateLoadedGetEventsAndMembers) then) =
+      __$$HomeStateLoadedGetEventsAndMembersCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$HomeStateLoadedGetEventsAndMembersCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res>
+    implements _$$HomeStateLoadedGetEventsAndMembersCopyWith<$Res> {
+  __$$HomeStateLoadedGetEventsAndMembersCopyWithImpl(
+      _$HomeStateLoadedGetEventsAndMembers _value,
+      $Res Function(_$HomeStateLoadedGetEventsAndMembers) _then)
+      : super(_value, (v) => _then(v as _$HomeStateLoadedGetEventsAndMembers));
+
+  @override
+  _$HomeStateLoadedGetEventsAndMembers get _value =>
+      super._value as _$HomeStateLoadedGetEventsAndMembers;
+}
+
+/// @nodoc
+
+class _$HomeStateLoadedGetEventsAndMembers
+    implements HomeStateLoadedGetEventsAndMembers {
+  const _$HomeStateLoadedGetEventsAndMembers();
+
+  @override
+  String toString() {
+    return 'HomeState.loadedGetEventsAndMembers()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HomeStateLoadedGetEventsAndMembers);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function(Transfers transfers) loaded,
+    required TResult Function(String message) error,
+    required TResult Function() initSearchStation,
+    required TResult Function() loadingSearchStaion,
+    required TResult Function(List<String> list) loadedSearchStation,
+    required TResult Function(String message) errorSearchStation,
+    required TResult Function() initGetEventsAndMembers,
+    required TResult Function() loadingGetEventsAndMembers,
+    required TResult Function() loadedGetEventsAndMembers,
+  }) {
+    return loadedGetEventsAndMembers();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(Transfers transfers)? loaded,
+    TResult Function(String message)? error,
+    TResult Function()? initSearchStation,
+    TResult Function()? loadingSearchStaion,
+    TResult Function(List<String> list)? loadedSearchStation,
+    TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
+  }) {
+    return loadedGetEventsAndMembers?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(Transfers transfers)? loaded,
+    TResult Function(String message)? error,
+    TResult Function()? initSearchStation,
+    TResult Function()? loadingSearchStaion,
+    TResult Function(List<String> list)? loadedSearchStation,
+    TResult Function(String message)? errorSearchStation,
+    TResult Function()? initGetEventsAndMembers,
+    TResult Function()? loadingGetEventsAndMembers,
+    TResult Function()? loadedGetEventsAndMembers,
+    required TResult orElse(),
+  }) {
+    if (loadedGetEventsAndMembers != null) {
+      return loadedGetEventsAndMembers();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HomeStateInit value) init,
+    required TResult Function(HomeStateLoading value) loading,
+    required TResult Function(HomeStateLoaded value) loaded,
+    required TResult Function(HomeStateError value) error,
+    required TResult Function(HomeStateInitSearchStation value)
+        initSearchStation,
+    required TResult Function(HomeStateLoadingSearchStation value)
+        loadingSearchStaion,
+    required TResult Function(HomeStateLoadedSearchStation value)
+        loadedSearchStation,
+    required TResult Function(HomeStateErrorSearchStation value)
+        errorSearchStation,
+    required TResult Function(HomeStateInitGetEventsAndMembers value)
+        initGetEventsAndMembers,
+    required TResult Function(HomeStateLoadingGetEventsAndMembers value)
+        loadingGetEventsAndMembers,
+    required TResult Function(HomeStateLoadedGetEventsAndMembers value)
+        loadedGetEventsAndMembers,
+  }) {
+    return loadedGetEventsAndMembers(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(HomeStateInit value)? init,
+    TResult Function(HomeStateLoading value)? loading,
+    TResult Function(HomeStateLoaded value)? loaded,
+    TResult Function(HomeStateError value)? error,
+    TResult Function(HomeStateInitSearchStation value)? initSearchStation,
+    TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
+    TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
+    TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
+  }) {
+    return loadedGetEventsAndMembers?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HomeStateInit value)? init,
+    TResult Function(HomeStateLoading value)? loading,
+    TResult Function(HomeStateLoaded value)? loaded,
+    TResult Function(HomeStateError value)? error,
+    TResult Function(HomeStateInitSearchStation value)? initSearchStation,
+    TResult Function(HomeStateLoadingSearchStation value)? loadingSearchStaion,
+    TResult Function(HomeStateLoadedSearchStation value)? loadedSearchStation,
+    TResult Function(HomeStateErrorSearchStation value)? errorSearchStation,
+    TResult Function(HomeStateInitGetEventsAndMembers value)?
+        initGetEventsAndMembers,
+    TResult Function(HomeStateLoadingGetEventsAndMembers value)?
+        loadingGetEventsAndMembers,
+    TResult Function(HomeStateLoadedGetEventsAndMembers value)?
+        loadedGetEventsAndMembers,
+    required TResult orElse(),
+  }) {
+    if (loadedGetEventsAndMembers != null) {
+      return loadedGetEventsAndMembers(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class HomeStateLoadedGetEventsAndMembers implements HomeState {
+  const factory HomeStateLoadedGetEventsAndMembers() =
+      _$HomeStateLoadedGetEventsAndMembers;
 }

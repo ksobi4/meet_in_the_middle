@@ -17,4 +17,12 @@ class HomeState with _$HomeState {
 
   const factory HomeState.errorSearchStation(String message) =
       HomeStateErrorSearchStation;
+
+  //get Events and members of train
+  const factory HomeState.initGetEventsAndMembers() =
+      HomeStateInitGetEventsAndMembers;
+  const factory HomeState.loadingGetEventsAndMembers() =
+      HomeStateLoadingGetEventsAndMembers;
+  const factory HomeState.loadedGetEventsAndMembers() =
+      HomeStateLoadedGetEventsAndMembers;
 }

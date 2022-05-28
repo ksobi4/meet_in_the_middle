@@ -6,4 +6,7 @@ class HomeEvent with _$HomeEvent {
           String startStation, String endStation, String date, String time) =
       HomeSearchTransfers;
   const factory HomeEvent.searchStation(String stringPart) = HomeSearchStation;
+
+  const factory HomeEvent.getEventsAndMembers(Train train) =
+      HomeEventGetEventsAndMembers;
 }
