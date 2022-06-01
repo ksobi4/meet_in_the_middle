@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import 'package:mitm4/features/home/presentation/widgets/events_list.dart';
 import 'package:mitm4/features/home/presentation/widgets/members_list.dart';
 
 import '../../../core/get_it.dart';
+import '../../../core/router/router.gr.dart';
 import '../model/transfers.dart';
 import '../service/home_service.dart';
 import 'train_events_bloc/train_events_bloc.dart';
@@ -169,7 +171,11 @@ class EventsDisplay extends StatelessWidget {
             );
           })),
         ),
-        // TextButton(onPressed, child: child)
+        TextButton(
+            onPressed: () {
+              context.router.push(AddEventPageRoute(train: train));
+            },
+            child: Text('Dodaj event')),
       ],
     );
   }
