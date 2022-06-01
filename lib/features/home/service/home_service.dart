@@ -1,3 +1,5 @@
+// ignore_for_file: void_checks
+
 import 'dart:convert';
 import 'dart:developer';
 
@@ -164,7 +166,7 @@ class HomeService {
           .get();
       var key = snap.children.first.key.toString();
       // log('key =$key');
-      DatabaseReference temp = await db.ref('trains/$key').child('members');
+      DatabaseReference temp = db.ref('trains/$key').child('members');
       var tempData = jsonDecode(jsonEncode((await temp.get()).value));
       tempData.add(userId);
       // log('tempkey = ${tempData}');
@@ -186,7 +188,7 @@ class HomeService {
           .equalTo(train.trainNumber)
           .get();
       var key = snap.children.first.key.toString();
-      DatabaseReference temp = await db.ref('trains/$key').child('members');
+      DatabaseReference temp = db.ref('trains/$key').child('members');
       var memberIdList = jsonDecode(jsonEncode((await temp.get()).value));
       bool check = true;
       for (String id in memberIdList) {
@@ -212,7 +214,7 @@ class HomeService {
           .get();
       var key = snap.children.first.key.toString();
       log('key =$key');
-      DatabaseReference temp = await db.ref('trains/$key').child('members');
+      DatabaseReference temp = db.ref('trains/$key').child('members');
       List<dynamic> memberIdList =
           jsonDecode(jsonEncode((await temp.get()).value));
       bool check = false;

@@ -6,11 +6,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mitm4/features/home/presentation/is_train_member_bloc/is_train_member_bloc.dart';
 
 import 'package:mitm4/features/home/presentation/widgets/events_list.dart';
 import 'package:mitm4/features/home/presentation/widgets/members_list.dart';
 
-import '../../../core/errors/failure.dart';
 import '../../../core/get_it.dart';
 import '../model/transfers.dart';
 import '../service/home_service.dart';
@@ -35,6 +35,9 @@ class _TrainPageState extends State<TrainPage> {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return Text('aa');
+    }
 
     return SafeArea(
         child: Scaffold(
@@ -53,48 +56,48 @@ class _TrainPageState extends State<TrainPage> {
                   MembersDisplay(
                     train: widget.train,
                   ),
-                  ChangingButton(
-                    isSelected: true,
-                    textSelected: 'join',
-                    textUnselected: 'textUnSele',
-                    onPress: (value) {
-                      log('pressed');
-                      try {
-                        HomeService homeService = sl.get<HomeService>();
-                        if (user != null) {
-                          homeService.joinTrain(user.uid, widget.train);
-                        } else {
-                          log('blad w dołacznaiu do pociągu, nie otrzymano zalogowanego urzystkownaia');
-                        }
-                      } catch (e) {
-                        log('erro $e');
-                      }
-                    },
-                  ),
-                  TextButton(
-                      onPressed: () async {
-                        HomeService homeService = sl.get<HomeService>();
-                        if (user != null) {
-                          await homeService.isUserInTrain(
-                              user.uid, widget.train);
-                        } else {
-                          log('user = null');
-                        }
+                  BlocProvider.value(
+                    value: sl<IsTrainMemberBloc>()
+                      ..add(IsTrainMemberEvent.get(user.uid, widget.train)),
+                    child: Builder(
+                      builder: (context) {
+                        return BlocBuilder<IsTrainMemberBloc,
+                            IsTrainMemberState>(builder: ((context, state) {
+                          if (state is IsTrainMemberInit) {
+                            return Container();
+                          } else if (state is IsTrainMemberLoading) {
+                            return Text('loading');
+                          } else if (state is IsTrainMemberError) {
+                            return Text('errror ${state.message}');
+                          } else if (state is IsTrainMemberLoaded) {
+                            return ChangingButton(
+                              isSelected: state.isTrainMember,
+                              textSelected: 'Wyjdź',
+                              textUnselected: 'Dołącz',
+                              onPress: _onPress,
+                            );
+                          } else {
+                            return Container();
+                          }
+                        }));
                       },
-                      child: Text('test btn')),
-                  TextButton(
-                      onPressed: () async {
-                        HomeService homeService = sl.get<HomeService>();
-                        if (user != null) {
-                          await homeService.leaveTrain(user.uid, widget.train);
-                        } else {
-                          log('user = null');
-                        }
-                      },
-                      child: Text('leave btn')),
+                    ),
+                  )
                 ],
               ),
             )));
+  }
+
+  void _onPress(isPressed) {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      log('isPresss = $isPressed');
+      if (isPressed) {
+        sl<HomeService>().leaveTrain(user.uid, widget.train);
+      } else {
+        sl<HomeService>().joinTrain(user.uid, widget.train);
+      }
+    }
   }
 }
 
@@ -118,14 +121,14 @@ class ChangingButton extends StatefulWidget {
 class _ChangingButtonState extends State<ChangingButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TextButton(
-        onPressed: (() {
-          widget.onPress(context);
-        }),
-        child: Text(
-            widget.isSelected ? widget.textSelected : widget.textUnselected),
-      ),
+    return TextButton(
+      onPressed: (() {
+        widget.onPress(widget.isSelected);
+        widget.isSelected = !widget.isSelected;
+        setState(() {});
+      }),
+      child:
+          Text(widget.isSelected ? widget.textSelected : widget.textUnselected),
     );
   }
 }
