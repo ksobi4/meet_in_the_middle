@@ -43,7 +43,7 @@ class OneTransferWidget extends StatelessWidget {
           title: ExpandionTaileTitle(
             transfer: transfer,
           ),
-          expandedColor: Colors.grey[300],
+          expandedColor: Colors.grey[800],
           children: [ExnandedTaileBody(transfer: transfer)],
         ));
   }
@@ -79,31 +79,53 @@ class OneTrain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.grey[200],
+      color: Colors.grey[700],
       child: SizedBox(
         height: 60,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Column(
               children: [
                 _generateCarrierImage(train.carrier),
-                Text(train.trainNumber),
-                Text(train.name == '' ? '-=-' : train.name)
+                Text(
+                  train.trainNumber,
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  train.name == '' ? '-=-' : train.name,
+                  textAlign: TextAlign.center,
+                )
               ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(width: 80, child: Text(train.startStation)),
-                Text(train.startTime)
+                SizedBox(
+                    width: 80,
+                    child: Text(
+                      train.startStation,
+                      textAlign: TextAlign.center,
+                    )),
+                Text(
+                  train.startTime,
+                  textAlign: TextAlign.center,
+                )
               ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(width: 80, child: Text(train.endStation)),
-                Text(train.endTime)
+                SizedBox(
+                    width: 80,
+                    child: Text(
+                      train.endStation,
+                      textAlign: TextAlign.center,
+                    )),
+                Text(
+                  train.endTime,
+                  textAlign: TextAlign.center,
+                )
               ],
             ),
             Text(train.distance),
@@ -164,9 +186,12 @@ class StationDisplayInTitle extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(station, style: const TextStyle(fontSize: 14)),
+            Text(station,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 14)),
             Text(
               time,
+              textAlign: TextAlign.center,
               style: TextStyle(color: Colors.red[600], fontSize: 13),
             )
           ],

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mitm4/core/get_it.dart';
+import 'package:mitm4/core/theme.dart';
 import 'package:wakelock/wakelock.dart';
 
 import 'core/router/router.gr.dart';
@@ -40,9 +41,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerDelegate: _router.delegate(),
       routeInformationParser: _router.defaultRouteParser(),
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.light,
+      theme: AppTheme().dark,
+      darkTheme: AppTheme().dark,
     );
   }
 }
