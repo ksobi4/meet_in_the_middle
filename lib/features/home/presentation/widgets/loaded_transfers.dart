@@ -38,9 +38,9 @@ class OneTransferWidget extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         child: ExpansionTileCard(
-          contentPadding: EdgeInsets.symmetric(horizontal: 4),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 4),
           // trailing: SizedBox(),
-          title: ExpandionListTitle(
+          title: ExpandionTaileTitle(
             transfer: transfer,
           ),
           expandedColor: Colors.grey[300],
@@ -61,7 +61,7 @@ class ExnandedTaileBody extends StatelessWidget {
     List<Widget> list = [];
 
     for (var train in transfer.trains) {
-      list.add(ExpandedTileOneTrain(
+      list.add(OneTrain(
         train: train,
       ));
     }
@@ -69,9 +69,9 @@ class ExnandedTaileBody extends StatelessWidget {
   }
 }
 
-class ExpandedTileOneTrain extends StatelessWidget {
+class OneTrain extends StatelessWidget {
   Train train;
-  ExpandedTileOneTrain({
+  OneTrain({
     Key? key,
     required this.train,
   }) : super(key: key);
@@ -88,7 +88,7 @@ class ExpandedTileOneTrain extends StatelessWidget {
             Column(
               children: [
                 _generateCarrierImage(train.carrier),
-                Text(train.number),
+                Text(train.trainNumber),
                 Text(train.name == '' ? '-=-' : train.name)
               ],
             ),
@@ -119,13 +119,13 @@ class ExpandedTileOneTrain extends StatelessWidget {
   }
 
   void _onPressedMoreBtn(BuildContext context, train) {
-    context.router.push(TrainDetailsPageRoute(train: train));
+    context.router.push(TrainPageRoute(train: train));
   }
 }
 
-class ExpandionListTitle extends StatelessWidget {
+class ExpandionTaileTitle extends StatelessWidget {
   Transfer transfer;
-  ExpandionListTitle({
+  ExpandionTaileTitle({
     Key? key,
     required this.transfer,
   }) : super(key: key);
@@ -135,11 +135,11 @@ class ExpandionListTitle extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        StationTextWidget(
+        StationDisplayInTitle(
             station: transfer.trains[0].startStation,
             time: transfer.trains[0].startTime),
-        _generate(transfer),
-        StationTextWidget(
+        _generateTransfer(transfer),
+        StationDisplayInTitle(
             station: transfer.trains[transfer.trains.length - 1].endStation,
             time: transfer.trains[transfer.trains.length - 1].endTime)
       ],
@@ -147,11 +147,11 @@ class ExpandionListTitle extends StatelessWidget {
   }
 }
 
-class StationTextWidget extends StatelessWidget {
+class StationDisplayInTitle extends StatelessWidget {
   String station;
   String time;
 
-  StationTextWidget({
+  StationDisplayInTitle({
     Key? key,
     required this.station,
     required this.time,
@@ -164,7 +164,7 @@ class StationTextWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(station, style: TextStyle(fontSize: 14)),
+            Text(station, style: const TextStyle(fontSize: 14)),
             Text(
               time,
               style: TextStyle(color: Colors.red[600], fontSize: 13),
@@ -174,9 +174,7 @@ class StationTextWidget extends StatelessWidget {
   }
 }
 
-Row _generate(Transfer trs) {
-  String imgUrl = 'https://via.placeholder.com/150C';
-
+Row _generateTransfer(Transfer trs) {
   List<Widget> list = [];
   for (var el in trs.trains) {
     list.add(Padding(
@@ -184,7 +182,7 @@ Row _generate(Transfer trs) {
       child: Column(
         children: [
           _generateCarrierImage(el.carrier),
-          Text(el.number),
+          Text(el.trainNumber),
         ],
       ),
     ));

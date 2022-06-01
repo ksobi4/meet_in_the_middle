@@ -15,8 +15,8 @@ import 'package:flutter/material.dart' as _i6;
 
 import '../../features/auth/presentation/auth_wrapper.dart' as _i4;
 import '../../features/home/model/transfers.dart' as _i7;
-import '../../features/home/presentation/add_transfer_page.dart' as _i2;
-import '../../features/home/presentation/train_details_page.dart' as _i3;
+import '../../features/home/presentation/search_transfer_page.dart' as _i2;
+import '../../features/home/presentation/train_page.dart' as _i3;
 import '../../main_page.dart' as _i1;
 
 class AppRouter extends _i5.RootStackRouter {
@@ -29,15 +29,17 @@ class AppRouter extends _i5.RootStackRouter {
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.MainPage());
     },
-    AddTransferPageRoute.name: (routeData) {
+    SearchTransfersPageRoute.name: (routeData) {
+      final args = routeData.argsAs<SearchTransfersPageRouteArgs>(
+          orElse: () => const SearchTransfersPageRouteArgs());
       return _i5.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.AddTransferPage());
+          routeData: routeData, child: _i2.SearchTransfersPage(key: args.key));
     },
-    TrainDetailsPageRoute.name: (routeData) {
-      final args = routeData.argsAs<TrainDetailsPageRouteArgs>();
+    TrainPageRoute.name: (routeData) {
+      final args = routeData.argsAs<TrainPageRouteArgs>();
       return _i5.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i3.TrainDetailsPage(key: args.key, train: args.train));
+          child: _i3.TrainPage(key: args.key, train: args.train));
     },
     AuthWrapperRoute.name: (routeData) {
       final args = routeData.argsAs<AuthWrapperRouteArgs>(
@@ -50,9 +52,9 @@ class AppRouter extends _i5.RootStackRouter {
   @override
   List<_i5.RouteConfig> get routes => [
         _i5.RouteConfig(MainPageRoute.name, path: '/main-page'),
-        _i5.RouteConfig(AddTransferPageRoute.name, path: '/add-transfer-page'),
-        _i5.RouteConfig(TrainDetailsPageRoute.name,
-            path: '/train-details-page'),
+        _i5.RouteConfig(SearchTransfersPageRoute.name,
+            path: '/search-transfers-page'),
+        _i5.RouteConfig(TrainPageRoute.name, path: '/train-page'),
         _i5.RouteConfig(AuthWrapperRoute.name, path: '/')
       ];
 }
@@ -66,28 +68,41 @@ class MainPageRoute extends _i5.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.AddTransferPage]
-class AddTransferPageRoute extends _i5.PageRouteInfo<void> {
-  const AddTransferPageRoute()
-      : super(AddTransferPageRoute.name, path: '/add-transfer-page');
+/// [_i2.SearchTransfersPage]
+class SearchTransfersPageRoute
+    extends _i5.PageRouteInfo<SearchTransfersPageRouteArgs> {
+  SearchTransfersPageRoute({_i6.Key? key})
+      : super(SearchTransfersPageRoute.name,
+            path: '/search-transfers-page',
+            args: SearchTransfersPageRouteArgs(key: key));
 
-  static const String name = 'AddTransferPageRoute';
+  static const String name = 'SearchTransfersPageRoute';
+}
+
+class SearchTransfersPageRouteArgs {
+  const SearchTransfersPageRouteArgs({this.key});
+
+  final _i6.Key? key;
+
+  @override
+  String toString() {
+    return 'SearchTransfersPageRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
-/// [_i3.TrainDetailsPage]
-class TrainDetailsPageRoute
-    extends _i5.PageRouteInfo<TrainDetailsPageRouteArgs> {
-  TrainDetailsPageRoute({_i6.Key? key, required _i7.Train train})
-      : super(TrainDetailsPageRoute.name,
-            path: '/train-details-page',
-            args: TrainDetailsPageRouteArgs(key: key, train: train));
+/// [_i3.TrainPage]
+class TrainPageRoute extends _i5.PageRouteInfo<TrainPageRouteArgs> {
+  TrainPageRoute({_i6.Key? key, required _i7.Train train})
+      : super(TrainPageRoute.name,
+            path: '/train-page',
+            args: TrainPageRouteArgs(key: key, train: train));
 
-  static const String name = 'TrainDetailsPageRoute';
+  static const String name = 'TrainPageRoute';
 }
 
-class TrainDetailsPageRouteArgs {
-  const TrainDetailsPageRouteArgs({this.key, required this.train});
+class TrainPageRouteArgs {
+  const TrainPageRouteArgs({this.key, required this.train});
 
   final _i6.Key? key;
 
@@ -95,7 +110,7 @@ class TrainDetailsPageRouteArgs {
 
   @override
   String toString() {
-    return 'TrainDetailsPageRouteArgs{key: $key, train: $train}';
+    return 'TrainPageRouteArgs{key: $key, train: $train}';
   }
 }
 

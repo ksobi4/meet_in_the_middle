@@ -3,8 +3,10 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:mitm4/features/auth/service/auth_local_service.dart';
 import 'package:mitm4/features/auth/service/auth_service.dart';
-import 'package:mitm4/features/home/presentation/bloc/home_bloc.dart';
 import 'package:mitm4/features/home/service/home_service.dart';
+import '../features/home/presentation/train_events_bloc/train_events_bloc.dart';
+import '../features/home/presentation/train_members_bloc/train_members_bloc.dart';
+import '../features/home/presentation/transfers_bloc/transfers_bloc.dart';
 import './config/config.dart' as config;
 import 'http_client.dart';
 
@@ -18,7 +20,9 @@ Future<void> setupGetIt() async {
       () => AuthService(FirebaseAuth.instance, AuthLocalService()));
 
   //BLoC
-  sl.registerLazySingleton<HomeBloc>(() => HomeBloc(homeService: sl()));
+  sl.registerLazySingleton<TransfersBloc>(() => TransfersBloc(sl()));
+  sl.registerLazySingleton<TrainEventsBloc>(() => TrainEventsBloc(sl()));
+  sl.registerLazySingleton<TrainMembersBloc>(() => TrainMembersBloc(sl()));
 
   //other
   sl.registerLazySingleton<Box>(() => Hive.box(config.hiveBoxName));

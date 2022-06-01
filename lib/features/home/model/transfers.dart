@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:json_annotation/json_annotation.dart';
 
@@ -62,8 +63,10 @@ class Train {
   String endTime;
   String carrier;
   String name;
-  String number;
+  String trainNumber;
   String date;
+  List members;
+  List events;
 
   Train({
     this.distance = '',
@@ -73,9 +76,15 @@ class Train {
     this.endTime = '',
     this.carrier = '',
     this.name = '',
-    this.number = '',
+    this.trainNumber = '',
     this.date = '',
+    this.members = const [],
+    this.events = const [],
   });
+
+  set setMember(List<String> members) {
+    this.members = members;
+  }
 
   Map<String, dynamic> toMap() {
     return {
@@ -86,12 +95,16 @@ class Train {
       'endTime': endTime,
       'carrier': carrier,
       'name': name,
-      'number': number,
+      'trainNumber': trainNumber,
       'date': date,
+      'members': members,
+      'events': events,
     };
   }
 
   factory Train.fromMap(Map<String, dynamic> map) {
+    log('in trainFromMap ${map["members"]}');
+
     return Train(
       distance: map['distance'] ?? '',
       startStation: map['startStation'] ?? '',
@@ -100,12 +113,22 @@ class Train {
       endTime: map['endTime'] ?? '',
       carrier: map['carrier'] ?? '',
       name: map['name'] ?? '',
-      number: map['number'] ?? '',
+      trainNumber: map['trainNumber'] ?? '',
       date: map['date'] ?? '',
+      members: map['members'] ?? [],
+      events: map['events'] ?? [],
     );
   }
+
+  //members: map['members'] ?? [],
+  // events: map['events'] ?? [],
 
   String toJson() => json.encode(toMap());
 
   factory Train.fromJson(String source) => Train.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'Train(distance: $distance, startStation: $startStation, endStation: $endStation, startTime: $startTime, endTime: $endTime, carrier: $carrier, name: $name, trainNumber: $trainNumber, date: $date, members: $members, events: $events)';
+  }
 }

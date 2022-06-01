@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mitm4/core/get_it.dart';
+import 'package:wakelock/wakelock.dart';
 
 import 'core/router/router.gr.dart';
 
@@ -13,7 +13,7 @@ Future<void> main() async {
 
   //Database
   await Firebase.initializeApp();
-  FirebaseDatabase.instance.setPersistenceEnabled(true);
+  // FirebaseDatabase.instance.setPersistenceEnabled(true);
   //get it locator
   await setupGetIt();
 
@@ -24,12 +24,15 @@ Future<void> main() async {
   await Hive.openBox(config.hiveBoxName);
 
   runApp(MyApp());
+  Wakelock.enable();
 }
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
   final _router = AppRouter();
+
+  //dev only!!
 
   // This widget is the root of your application.
   @override
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
       routeInformationParser: _router.defaultRouteParser(),
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
     );
   }
 }

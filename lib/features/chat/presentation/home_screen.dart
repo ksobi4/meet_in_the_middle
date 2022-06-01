@@ -10,6 +10,8 @@ import 'chat_screen.dart';
 import 'widgets/avatar.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -83,8 +85,8 @@ class _MessageTitle extends StatelessWidget {
                     height: 16,
                     child: Text(
                       messageData.message,
-                      style:
-                          TextStyle(fontSize: 12, color: AppColors.textFaded),
+                      style: const TextStyle(
+                          fontSize: 12, color: AppColors.textFaded),
                     ))
               ],
             )),

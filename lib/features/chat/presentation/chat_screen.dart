@@ -6,7 +6,6 @@ import '../../../core/theme.dart';
 import '../model/message_data.dart';
 import 'widgets/glowing_action_button.dart';
 
-
 class ChatScreen extends StatelessWidget {
   static Route route(MessageData data) => MaterialPageRoute(
         builder: (context) => ChatScreen(
@@ -25,7 +24,7 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 54,
-        title: _AppBarTitle(),
+        title: const _AppBarTitle(),
         leading: Align(
           alignment: Alignment.centerRight,
           child: IconBackground(
@@ -40,11 +39,11 @@ class ChatScreen extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              decoration: BoxDecoration(color: Colors.red),
+              decoration: const BoxDecoration(color: Colors.red),
               child: null,
             ),
           ),
-          _ActionBar(),
+          const _ActionBar(),
         ],
       ),
     );
@@ -56,7 +55,7 @@ class _AppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Micheal Natro');
+    return const Text('Micheal Natro');
   }
 }
 

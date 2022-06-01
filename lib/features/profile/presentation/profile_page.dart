@@ -11,6 +11,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    User user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -18,7 +19,8 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text('Profile page'),
-              Text(FirebaseAuth.instance.currentUser!.uid.toString()),
+              Text(user.uid.toString()),
+              Text(user.email.toString()),
               TextButton(
                   onPressed: () {
                     FirebaseAuth.instance.signOut();

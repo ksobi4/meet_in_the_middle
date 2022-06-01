@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
               const Text('Home page'),
               TextButton(
                 onPressed: () async {
-                  context.router.push(const AddTransferPageRoute());
+                  context.router.push(SearchTransfersPageRoute());
                 },
                 child: const Text('Dodaj przejazd'),
               ),

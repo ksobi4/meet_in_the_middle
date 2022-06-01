@@ -1,14 +1,15 @@
 import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:faker/faker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_ui/flutter_auth_ui.dart';
 import 'package:hive/hive.dart';
 
-import 'package:mitm4/core/router/router.gr.dart';
-
 import '../../../core/get_it.dart';
+import '../../../core/router/router.gr.dart';
 
 class AuthWrapper extends StatelessWidget {
   AuthWrapper({Key? key}) : super(key: key);
@@ -19,25 +20,29 @@ class AuthWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
       if (user == null) {
         log('1USER LOG OUT');
         // context.router.replace(AuthWrapperRoute());
         _moveToLoginPage();
       } else {
+        //add user if not exist in ;db
+        final db = FirebaseDatabase.instance;
+        DataSnapshot snap = await db.ref('users/${user.uid}').get();
+        if (!snap.exists) {
+          db.ref('users/${user.uid}').set({
+            'nickname': faker.person.lastName(),
+            'email': user.email,
+            "name": faker.person.firstName(),
+            "avatarUrl": faker.image.image(),
+            "lastMessTime": '10:30 10.04.2022',
+          });
+        }
+
         log('1USER LOG IN');
         context.router.replace(const MainPageRoute());
       }
     });
-
-    // User? user = FirebaseAuth.instance.currentUser;
-    // if (user == null) {
-    //   log('NO LOGED IN USER');
-    //   _moveToLoginPage();
-    // } else {
-    //   log('AUTO LOG IN as User.id= ${user.uid}');
-    //   context.router.replace(const MainPageRoute());
-    // }
 
     return Scaffold(
       body: Center(
