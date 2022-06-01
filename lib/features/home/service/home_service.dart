@@ -154,6 +154,83 @@ class HomeService {
       return null;
     }
   }
+
+  Future<Either<Failure, bool>> joinTrain(String userId, Train train) async {
+    try {
+      DataSnapshot snap = await db
+          .ref('trains')
+          .orderByChild('trainNumber')
+          .equalTo(train.trainNumber)
+          .get();
+      var key = snap.children.first.key.toString();
+      // log('key =$key');
+      DatabaseReference temp = await db.ref('trains/$key').child('members');
+      var tempData = jsonDecode(jsonEncode((await temp.get()).value));
+      tempData.add(userId);
+      // log('tempkey = ${tempData}');
+      await db.ref('trains/$key/members').set(tempData);
+
+      return const Right(true);
+    } catch (e) {
+      log('HOME SERVICE joinTrain $e');
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, bool>> isUserInTrain(
+      String userId, Train train) async {
+    try {
+      DataSnapshot snap = await db
+          .ref('trains')
+          .orderByChild('trainNumber')
+          .equalTo(train.trainNumber)
+          .get();
+      var key = snap.children.first.key.toString();
+      DatabaseReference temp = await db.ref('trains/$key').child('members');
+      var memberIdList = jsonDecode(jsonEncode((await temp.get()).value));
+      bool check = true;
+      for (String id in memberIdList) {
+        if (id == userId) check = false;
+      }
+      if (check) {
+        return const Right(false);
+      } else {
+        return const Right(true);
+      }
+    } catch (e) {
+      log('HOME SERVICE isUserInTrain $e');
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, void>> leaveTrain(String userId, Train train) async {
+    try {
+      DataSnapshot snap = await db
+          .ref('trains')
+          .orderByChild('trainNumber')
+          .equalTo(train.trainNumber)
+          .get();
+      var key = snap.children.first.key.toString();
+      log('key =$key');
+      DatabaseReference temp = await db.ref('trains/$key').child('members');
+      List<dynamic> memberIdList =
+          jsonDecode(jsonEncode((await temp.get()).value));
+      bool check = false;
+      for (String id in memberIdList) {
+        if (id == userId) check = true;
+      }
+      if (check) {
+        memberIdList.remove(userId);
+        await db.ref('trains/$key/members').set(memberIdList);
+        return const Right(true);
+      } else {
+        return const Right(false);
+      }
+    } catch (e) {
+      log('HOME SERVICE leaveTrain $e');
+      return Left(Failure(e.toString()));
+    }
+  }
 }
 
 String _rebuildStaiton(String station) {

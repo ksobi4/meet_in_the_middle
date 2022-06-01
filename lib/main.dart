@@ -32,8 +32,6 @@ class MyApp extends StatelessWidget {
 
   final _router = AppRouter();
 
-  //dev only!!
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
