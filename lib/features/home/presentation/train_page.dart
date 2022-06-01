@@ -88,15 +88,17 @@ class _TrainPageState extends State<TrainPage> {
             )));
   }
 
-  void _onPress(isPressed) {
+  void _onPress(isPressed) async {
     User? user = FirebaseAuth.instance.currentUser;
+    HomeService hs = sl<HomeService>();
     if (user != null) {
       log('isPresss = $isPressed');
       if (isPressed) {
-        sl<HomeService>().leaveTrain(user.uid, widget.train);
+        await hs.leaveTrain(user.uid, widget.train);
       } else {
-        sl<HomeService>().joinTrain(user.uid, widget.train);
+        await hs.joinTrain(user.uid, widget.train);
       }
+      sl<TrainMembersBloc>().add(TrainMembersEvent.get(widget.train));
     }
   }
 }
@@ -167,6 +169,7 @@ class EventsDisplay extends StatelessWidget {
             );
           })),
         ),
+        // TextButton(onPressed, child: child)
       ],
     );
   }
