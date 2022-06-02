@@ -27,7 +27,7 @@ class UserPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text('${user.name} ${user.lastName}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.5,
@@ -39,12 +39,12 @@ class UserPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            children: [
+            children: const [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: SizedBox(
                   width: double.infinity,
-                  child: const Text(
+                  child: Text(
                     'Kim jestem?',
                     textAlign: TextAlign.start,
                     style: TextStyle(
@@ -56,7 +56,7 @@ class UserPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child:
                     SizedBox(width: double.infinity, child: Text('User Opis')),
               )
@@ -66,12 +66,12 @@ class UserPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            children: [
+            children: const [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: SizedBox(
                   width: double.infinity,
-                  child: const Text(
+                  child: Text(
                     'Zainteresowania',
                     textAlign: TextAlign.start,
                     style: TextStyle(
@@ -83,7 +83,7 @@ class UserPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: SizedBox(
                     width: double.infinity,
                     child: Text('User Zainteresowania')),

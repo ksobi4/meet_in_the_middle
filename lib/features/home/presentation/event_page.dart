@@ -8,11 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:mitm4/features/home/model/train_event.dart';
 import 'package:mitm4/features/home/presentation/widgets/member.dart';
 
-
 import '../../../core/theme.dart';
 
 import '../../../core/get_it.dart';
-import '../model/transfers.dart';
 import '../service/home_service.dart';
 
 import 'widgets/members_list.dart';
@@ -29,19 +27,19 @@ class EventPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(event.title)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: new FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton.extended(
         backgroundColor: AppColors.accent,
         onPressed: () {},
-        label: Text('Dołącz do wydarzenia'),
+        label: const Text('Dołącz do wydarzenia'),
       ),
       body: SingleChildScrollView(
           child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: SizedBox(
               width: double.infinity,
-              child: const Text(
+              child: Text(
                 'Opis',
                 textAlign: TextAlign.start,
                 style: TextStyle(
@@ -55,13 +53,13 @@ class EventPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
-                width: double.infinity, child: Text('${event.description}')),
+                width: double.infinity, child: Text(event.description)),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: SizedBox(
               width: double.infinity,
-              child: const Text(
+              child: Text(
                 'Twórca',
                 textAlign: TextAlign.start,
                 style: TextStyle(
@@ -76,11 +74,11 @@ class EventPage extends StatelessWidget {
             user: event.author,
             isMarkOut: true,
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: SizedBox(
               width: double.infinity,
-              child: const Text(
+              child: Text(
                 'Lista Uczestników',
                 textAlign: TextAlign.start,
                 style: TextStyle(

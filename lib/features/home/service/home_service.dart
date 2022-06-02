@@ -239,8 +239,6 @@ class HomeService {
       eventList.add(eventUUID);
       await db.ref('trains/$trainKey/events').set(eventList);
 
-      var userJson =
-          jsonDecode(jsonEncode((await db.ref('users/$userId').get()).value));
       User? user = await _getUser(userId);
       if (user == null) {
         throw 'no user';
@@ -258,7 +256,7 @@ class HomeService {
         "title": eventTitle,
       });
 
-      return Right(true);
+      return const Right(true);
     } catch (e) {
       log('HOME SERVICE createEvent $e');
       return Left(Failure(e.toString()));
@@ -277,7 +275,7 @@ class HomeService {
 
       await db.ref('events/${event.id}').remove();
 
-      return Right(true);
+      return const Right(true);
     } catch (e) {
       return Left(Failure(e.toString()));
     }
@@ -290,7 +288,6 @@ class HomeService {
         .equalTo(train.trainNumber)
         .get();
     if (snap.exists) {
-      Map<String, dynamic> train = jsonDecode(jsonEncode(snap.value));
       String key = snap.children.first.key.toString();
       return key;
     } else {

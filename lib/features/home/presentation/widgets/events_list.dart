@@ -1,7 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:ui';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -72,10 +70,6 @@ class EventsList extends StatelessWidget {
   }
 }
 
-_getLeadingForEvent() {
-  return const Text('L');
-}
-
 class _EventCard extends StatelessWidget {
   EventType eventType;
   TrainEvent event;
@@ -105,8 +99,8 @@ class _EventCard extends StatelessWidget {
   }
 }
 
-_eventTypeCoverter(String EventTypeInString) {
-  switch (EventTypeInString) {
+_eventTypeCoverter(String eventTypeInString) {
+  switch (eventTypeInString) {
     case 'cards':
       return EventType.cards;
     case 'chess':
