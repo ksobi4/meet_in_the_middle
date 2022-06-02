@@ -5,8 +5,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-import '../../../../core/get_it.dart';
-import '../../service/home_service.dart';
+import '../../../../../core/get_it.dart';
+import '../../../service/home_service.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;

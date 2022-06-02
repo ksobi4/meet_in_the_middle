@@ -1,3 +1,5 @@
+// ignore_for_file: void_checks
+
 import 'dart:convert';
 import 'dart:developer';
 
@@ -140,6 +142,159 @@ class HomeService {
     } catch (e) {
       log('HOME SERVICE getTrainEvents $e');
       return Left(Failure('HOME SERVICE getTrainEvents $e'));
+    }
+  }
+
+  Future<Either<Failure, bool>> joinTrain(String userId, Train train) async {
+    try {
+      DataSnapshot snap = await db
+          .ref('trains')
+          .orderByChild('trainNumber')
+          .equalTo(train.trainNumber)
+          .get();
+      var key = snap.children.first.key.toString();
+      // log('key =$key');
+      DatabaseReference temp = db.ref('trains/$key').child('members');
+      var tempData = jsonDecode(jsonEncode((await temp.get()).value));
+      tempData.add(userId);
+      // log('tempkey = ${tempData}');
+      await db.ref('trains/$key/members').set(tempData);
+
+      return const Right(true);
+    } catch (e) {
+      log('HOME SERVICE joinTrain $e');
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, bool>> isUserInTrain(
+      String userId, Train train) async {
+    try {
+      DataSnapshot snap = await db
+          .ref('trains')
+          .orderByChild('trainNumber')
+          .equalTo(train.trainNumber)
+          .get();
+      var key = snap.children.first.key.toString();
+      DatabaseReference temp = db.ref('trains/$key').child('members');
+      var memberIdList = jsonDecode(jsonEncode((await temp.get()).value));
+      bool check = true;
+      for (String id in memberIdList) {
+        if (id == userId) check = false;
+      }
+      if (check) {
+        return const Right(false);
+      } else {
+        return const Right(true);
+      }
+    } catch (e) {
+      log('HOME SERVICE isUserInTrain $e');
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, void>> leaveTrain(String userId, Train train) async {
+    try {
+      DataSnapshot snap = await db
+          .ref('trains')
+          .orderByChild('trainNumber')
+          .equalTo(train.trainNumber)
+          .get();
+      var key = snap.children.first.key.toString();
+      log('key =$key');
+      DatabaseReference temp = db.ref('trains/$key').child('members');
+      List<dynamic> memberIdList =
+          jsonDecode(jsonEncode((await temp.get()).value));
+      bool check = false;
+      for (String id in memberIdList) {
+        if (id == userId) check = true;
+      }
+      if (check) {
+        memberIdList.remove(userId);
+        await db.ref('trains/$key/members').set(memberIdList);
+        return const Right(true);
+      } else {
+        return const Right(false);
+      }
+    } catch (e) {
+      log('HOME SERVICE leaveTrain $e');
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, bool>> createEvent(
+      String userId,
+      Train train,
+      String eventTitle,
+      String eventDesc,
+      String carriage,
+      String place,
+      String eventType) async {
+    try {
+      String eventUUID = const Uuid().v4();
+      String trainKey = await _getTrainKey(train);
+
+      DatabaseReference temp = db.ref('trains/$trainKey').child('events');
+      var eventList = jsonDecode(jsonEncode((await temp.get()).value));
+      eventList.add(eventUUID);
+      await db.ref('trains/$trainKey/events').set(eventList);
+
+      var userJson =
+          jsonDecode(jsonEncode((await db.ref('users/$userId').get()).value));
+      User? user = await _getUser(userId);
+      if (user == null) {
+        throw 'no user';
+      }
+
+      db.ref('events/$eventUUID').set({
+        "id": eventUUID,
+        "author": userId,
+        "carriage": carriage,
+        "description": eventDesc,
+        "eventType": eventType,
+        "members": ['null'],
+        "seat": place,
+        "trainId": trainKey,
+        "title": eventTitle,
+      });
+
+      return Right(true);
+    } catch (e) {
+      log('HOME SERVICE createEvent $e');
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, bool>> deleteEvent(
+      String userId, TrainEvent event) async {
+    try {
+      String trainId = event.trainId;
+
+      DatabaseReference temp = db.ref('trains/$trainId').child('events');
+      var eventList = jsonDecode(jsonEncode((await temp.get()).value));
+      eventList.remove(event.id);
+      await db.ref('trains/$trainId/events').set(eventList);
+
+      await db.ref('events/${event.id}').remove();
+
+      return Right(true);
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<String> _getTrainKey(Train train) async {
+    DataSnapshot snap = await db
+        .ref('trains')
+        .orderByChild('trainNumber')
+        .equalTo(train.trainNumber)
+        .get();
+    if (snap.exists) {
+      Map<String, dynamic> train = jsonDecode(jsonEncode(snap.value));
+      String key = snap.children.first.key.toString();
+      return key;
+    } else {
+      return 'null';
     }
   }
 

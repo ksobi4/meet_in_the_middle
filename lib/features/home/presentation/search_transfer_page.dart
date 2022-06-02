@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mitm4/features/home/presentation/widgets/custom_text_field.dart';
-import 'package:mitm4/features/home/presentation/widgets/date_field.dart';
-import 'package:mitm4/features/home/presentation/widgets/loaded_transfers.dart';
 
 import '../../../core/get_it.dart';
 import '../model/transfers.dart';
 
 import 'transfers_bloc/transfers_bloc.dart';
-import 'widgets/time_field.dart';
+import 'widgets/input/custom_text_field.dart';
+import 'widgets/input/date_field.dart';
+import 'widgets/input/time_field.dart';
+import 'widgets/transfers_list.dart';
 
 // ignore: must_be_immutable
 class SearchTransfersPage extends StatelessWidget {
@@ -68,15 +68,14 @@ class SearchTransfersPage extends StatelessWidget {
                           return const CircularProgressIndicator();
                         } else if (state is TransfersStateLoaded) {
                           currentTransfers = state.transfers;
-                          return LoadedTransfers(transfers: state.transfers);
+                          return TransfersList(transfers: state.transfers);
                         } else if (state is TransfersStateError) {
                           return Text('Error ${state.message}');
                         } else {
                           if (currentTransfers == null) {
                             return const Text('else');
                           } else {
-                            return LoadedTransfers(
-                                transfers: currentTransfers!);
+                            return TransfersList(transfers: currentTransfers!);
                           }
                         }
                       },

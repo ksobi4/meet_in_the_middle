@@ -4,18 +4,24 @@ import 'package:auto_route/auto_route.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:mitm4/core/router/router.gr.dart';
+import 'package:mitm4/core/theme.dart';
 
 import '../../model/transfers.dart';
 
-class LoadedTransfers extends StatelessWidget {
+class TransfersList extends StatelessWidget {
   Transfers transfers;
-  LoadedTransfers({
+  TransfersList({
     Key? key,
     required this.transfers,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    for (Transfer trans in transfers.transfers) {
+      if (trans.trains.length > 3) {
+        transfers.transfers.remove(trans);
+      }
+    }
     return Expanded(
       child: ListView.builder(
           itemCount: transfers.transfers.length,
@@ -36,14 +42,19 @@ class OneTransferWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
         child: ExpansionTileCard(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+          contentPadding: const EdgeInsets.all(4),
           // trailing: SizedBox(),
           title: ExpandionTaileTitle(
             transfer: transfer,
           ),
+<<<<<<< HEAD:lib/features/home/presentation/widgets/loaded_transfers.dart
           expandedColor: Colors.grey[800],
+=======
+          //expandedColor: Colors.grey[800],
+          baseColor: AppColors.darkNavBarBg,
+>>>>>>> db059d59a6b32cabb8bdf6927612b142d8a20139:lib/features/home/presentation/widgets/transfers_list.dart
           children: [ExnandedTaileBody(transfer: transfer)],
         ));
   }
@@ -79,9 +90,13 @@ class OneTrain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+<<<<<<< HEAD:lib/features/home/presentation/widgets/loaded_transfers.dart
       color: Colors.grey[700],
+=======
+      color: AppColors.darkSmallTile,
+>>>>>>> db059d59a6b32cabb8bdf6927612b142d8a20139:lib/features/home/presentation/widgets/transfers_list.dart
       child: SizedBox(
-        height: 60,
+        height: 62,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -128,12 +143,18 @@ class OneTrain extends StatelessWidget {
                 )
               ],
             ),
-            Text(train.distance),
+            Text(
+              train.distance,
+              textAlign: TextAlign.center,
+            ),
             TextButton(
                 onPressed: () {
                   _onPressedMoreBtn(context, train);
                 },
-                child: const Text('Więcej'))
+                child: const Text(
+                  'Więcej',
+                  style: TextStyle(color: AppColors.accent),
+                ))
           ],
         ),
       ),
@@ -207,7 +228,10 @@ Row _generateTransfer(Transfer trs) {
       child: Column(
         children: [
           _generateCarrierImage(el.carrier),
-          Text(el.trainNumber),
+          Text(
+            el.trainNumber,
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     ));

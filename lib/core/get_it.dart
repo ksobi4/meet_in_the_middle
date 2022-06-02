@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:mitm4/features/auth/service/auth_local_service.dart';
 import 'package:mitm4/features/auth/service/auth_service.dart';
+import 'package:mitm4/features/home/presentation/is_train_member_bloc/is_train_member_bloc.dart';
 import 'package:mitm4/features/home/service/home_service.dart';
 import '../features/home/presentation/train_events_bloc/train_events_bloc.dart';
 import '../features/home/presentation/train_members_bloc/train_members_bloc.dart';
@@ -23,6 +24,7 @@ Future<void> setupGetIt() async {
   sl.registerLazySingleton<TransfersBloc>(() => TransfersBloc(sl()));
   sl.registerLazySingleton<TrainEventsBloc>(() => TrainEventsBloc(sl()));
   sl.registerLazySingleton<TrainMembersBloc>(() => TrainMembersBloc(sl()));
+  sl.registerLazySingleton<IsTrainMemberBloc>(() => IsTrainMemberBloc(sl()));
 
   //other
   sl.registerLazySingleton<Box>(() => Hive.box(config.hiveBoxName));
