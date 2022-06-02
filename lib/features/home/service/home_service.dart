@@ -145,18 +145,6 @@ class HomeService {
     }
   }
 
-  Future<User?> _getUser(String userId) async {
-    DataSnapshot snapUser = await db.ref('users/$userId').get();
-
-    if (snapUser.exists && userId != 'null') {
-      Map<String, dynamic> userJson = jsonDecode(jsonEncode(snapUser.value));
-
-      return User.fromJson(jsonEncode(userJson));
-    } else {
-      return null;
-    }
-  }
-
   Future<Either<Failure, bool>> joinTrain(String userId, Train train) async {
     try {
       DataSnapshot snap = await db
@@ -231,6 +219,94 @@ class HomeService {
     } catch (e) {
       log('HOME SERVICE leaveTrain $e');
       return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, bool>> createEvent(
+      String userId,
+      Train train,
+      String eventTitle,
+      String eventDesc,
+      String carriage,
+      String place,
+      String eventType) async {
+    try {
+      String eventUUID = const Uuid().v4();
+      String trainKey = await _getTrainKey(train);
+
+      DatabaseReference temp = db.ref('trains/$trainKey').child('events');
+      var eventList = jsonDecode(jsonEncode((await temp.get()).value));
+      eventList.add(eventUUID);
+      await db.ref('trains/$trainKey/events').set(eventList);
+
+      var userJson =
+          jsonDecode(jsonEncode((await db.ref('users/$userId').get()).value));
+      User? user = await _getUser(userId);
+      if (user == null) {
+        throw 'no user';
+      }
+
+      db.ref('events/$eventUUID').set({
+        "id": eventUUID,
+        "author": userId,
+        "carriage": carriage,
+        "description": eventDesc,
+        "eventType": eventType,
+        "members": ['null'],
+        "seat": place,
+        "trainId": trainKey,
+        "title": eventTitle,
+      });
+
+      return Right(true);
+    } catch (e) {
+      log('HOME SERVICE createEvent $e');
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, bool>> deleteEvent(
+      String userId, TrainEvent event) async {
+    try {
+      String trainId = event.trainId;
+
+      DatabaseReference temp = db.ref('trains/$trainId').child('events');
+      var eventList = jsonDecode(jsonEncode((await temp.get()).value));
+      eventList.remove(event.id);
+      await db.ref('trains/$trainId/events').set(eventList);
+
+      await db.ref('events/${event.id}').remove();
+
+      return Right(true);
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<String> _getTrainKey(Train train) async {
+    DataSnapshot snap = await db
+        .ref('trains')
+        .orderByChild('trainNumber')
+        .equalTo(train.trainNumber)
+        .get();
+    if (snap.exists) {
+      Map<String, dynamic> train = jsonDecode(jsonEncode(snap.value));
+      String key = snap.children.first.key.toString();
+      return key;
+    } else {
+      return 'null';
+    }
+  }
+
+  Future<User?> _getUser(String userId) async {
+    DataSnapshot snapUser = await db.ref('users/$userId').get();
+
+    if (snapUser.exists && userId != 'null') {
+      Map<String, dynamic> userJson = jsonDecode(jsonEncode(snapUser.value));
+
+      return User.fromJson(jsonEncode(userJson));
+    } else {
+      return null;
     }
   }
 }
