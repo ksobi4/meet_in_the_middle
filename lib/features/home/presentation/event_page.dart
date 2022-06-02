@@ -23,7 +23,7 @@ class EventPage extends StatelessWidget {
       floatingActionButton: new FloatingActionButton.extended(
         backgroundColor: AppColors.accent,
         onPressed: () {},
-        label: Text('Dołącz'),
+        label: Text('Dołącz do wydarzenia'),
       ),
       body: SingleChildScrollView(
           child: Column(

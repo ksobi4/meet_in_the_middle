@@ -70,7 +70,7 @@ class _MessageTitle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.only(top: 30, bottom: 10),
                   child: Text(
                     messageData.senderName,
                     overflow: TextOverflow.ellipsis,

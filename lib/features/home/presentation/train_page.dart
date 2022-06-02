@@ -51,7 +51,7 @@ class _TrainPageState extends State<TrainPage> {
             floatingActionButton: new FloatingActionButton.extended(
               backgroundColor: AppColors.accent,
               onPressed: () {},
-              label: Text('Dołącz'),
+              label: Text('Dołącz do przejazdu'),
             ),
             body: SingleChildScrollView(
               child: Column(

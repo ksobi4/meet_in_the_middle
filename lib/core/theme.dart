@@ -16,6 +16,11 @@ abstract class AppColors {
   static const darkBg = Color(0xFF023047);
   static const darkNavBarBg = Color(0xFF012036);
   static const darkSmallTile = Color(0xFF345369);
+  static const chessEventCard = Color(0xFF00b894);
+  static const cardsEventCard = Color(0xFFe17055);
+  static const talkEventCard = Color(0xFFff7675);
+  static const partyEventCard = Color(0xFFfd79a8);
+  static const customEventCard = Color(0xFFdfe6e9);
 }
 
 abstract class _LightColors {
