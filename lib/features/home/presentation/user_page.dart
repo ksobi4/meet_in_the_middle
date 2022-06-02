@@ -16,8 +16,81 @@ class UserPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Column(children: [
-        Text(user.avatarUrl),
-        Text('${user.name} ${user.lastName}'),
+        Center(
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 80.0,
+                backgroundImage: NetworkImage(user.avatarUrl),
+                backgroundColor: Colors.transparent,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text('${user.name} ${user.lastName}',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5,
+                    )),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: const Text(
+                    'Kim jestem?',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child:
+                    SizedBox(width: double.infinity, child: Text('User Opis')),
+              )
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: const Text(
+                    'Zainteresowania',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                    width: double.infinity,
+                    child: Text('User Zainteresowania')),
+              )
+            ],
+          ),
+        ),
         // Text(user.)
       ]),
     );

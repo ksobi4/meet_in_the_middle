@@ -1,10 +1,37 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:ui';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mitm4/core/router/router.gr.dart';
+import 'package:mitm4/core/theme.dart';
 
 import '../../model/train_event.dart';
+
+enum EventType {
+  custom,
+  cards,
+  chess,
+  talk,
+  party,
+}
+
+List<Color> eventColors = const [
+  AppColors.customEventCard,
+  AppColors.cardsEventCard,
+  AppColors.chessEventCard,
+  AppColors.talkEventCard,
+  AppColors.partyEventCard,
+];
+List<FaIcon> eventIcons = const [
+  FaIcon(FontAwesomeIcons.spaghettiMonsterFlying),
+  FaIcon(FontAwesomeIcons.solidHeart),
+  FaIcon(FontAwesomeIcons.chess),
+  FaIcon(FontAwesomeIcons.commentDots),
+  FaIcon(FontAwesomeIcons.champagneGlasses),
+];
 
 class EventsList extends StatelessWidget {
   List<TrainEvent> eventList;
@@ -16,17 +43,29 @@ class EventsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
-      child: ListView.builder(
+      height: 250,
+      child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              //childAspectRatio: 3 / 2,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
+              crossAxisCount: 3),
           itemBuilder: ((context, index) {
             TrainEvent event = eventList[index];
-            return ListTile(
-                leading: _getLeadingForEvent(),
-                title: Text(event.title),
-                subtitle: Text(event.author.name),
-                onTap: (() {
-                  context.router.push(EventPageRoute(event: event));
-                }));
+            return _EventCard(
+              eventType: _eventTypeCoverter(event.eventType),
+              event: event,
+            );
+            // return ListTile(
+            //     leading: _getLeadingForEvent(),
+            //     title: Text(event.title),
+            //     subtitle: Text(
+            //       event.author.name,
+            //       style: TextStyle(color: AppColors.accent),
+            //     ),
+            //     onTap: (() {
+            //       context.router.push(EventPageRoute(event: event));
+            //     }));
           }),
           itemCount: eventList.length),
     );
@@ -35,4 +74,48 @@ class EventsList extends StatelessWidget {
 
 _getLeadingForEvent() {
   return const Text('L');
+}
+
+class _EventCard extends StatelessWidget {
+  EventType eventType;
+  TrainEvent event;
+  _EventCard({
+    Key? key,
+    required this.eventType,
+    required this.event,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 20,
+      shape: const CircleBorder(),
+      color: eventColors[eventType.index],
+      child: SizedBox(
+          width: 100,
+          height: 100,
+          child: IconButton(
+              onPressed: () {
+                context.router.push(EventPageRoute(event: event));
+              },
+              iconSize: 35,
+              color: Colors.black,
+              icon: eventIcons[eventType.index])),
+    );
+  }
+}
+
+_eventTypeCoverter(String EventTypeInString) {
+  switch (EventTypeInString) {
+    case 'cards':
+      return EventType.cards;
+    case 'chess':
+      return EventType.chess;
+    case 'talk':
+      return EventType.talk;
+    case 'party':
+      return EventType.party;
+    default:
+      return EventType.custom;
+  }
 }

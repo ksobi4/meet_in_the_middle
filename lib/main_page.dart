@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:mitm4/core/theme.dart';
 
 import 'core/widgets/custom_animated_bottom_bar.dart';
 import 'features/chat/presentation/chat_home_page.dart';
@@ -43,7 +44,7 @@ class _MainPageState extends State<MainPage> {
   Widget _buildBottomBar() {
     return CustomAnimatedBottomBar(
       containerHeight: 65,
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.darkNavBarBg,
       selectedIndex: _currentIndex,
       showElevation: true,
       itemCornerRadius: 24,
