@@ -49,12 +49,8 @@ class OneTransferWidget extends StatelessWidget {
           title: ExpandionTaileTitle(
             transfer: transfer,
           ),
-<<<<<<< HEAD:lib/features/home/presentation/widgets/loaded_transfers.dart
-          expandedColor: Colors.grey[800],
-=======
           //expandedColor: Colors.grey[800],
           baseColor: AppColors.darkNavBarBg,
->>>>>>> db059d59a6b32cabb8bdf6927612b142d8a20139:lib/features/home/presentation/widgets/transfers_list.dart
           children: [ExnandedTaileBody(transfer: transfer)],
         ));
   }
@@ -90,11 +86,7 @@ class OneTrain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-<<<<<<< HEAD:lib/features/home/presentation/widgets/loaded_transfers.dart
-      color: Colors.grey[700],
-=======
       color: AppColors.darkSmallTile,
->>>>>>> db059d59a6b32cabb8bdf6927612b142d8a20139:lib/features/home/presentation/widgets/transfers_list.dart
       child: SizedBox(
         height: 62,
         child: Row(
