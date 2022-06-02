@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 abstract class AppColors {
   static const secondary = Color(0xFF3B76F6);
-  static const accent = Color(0xFFD6755B);
+  static const accent = Color(0xFFfb8500);
   static const textDark = Color(0xFF53585A);
   static const textLigth = Color(0xFFF5F5F5);
   static const textFaded = Color(0xFF9899A5);
@@ -13,6 +13,9 @@ abstract class AppColors {
   static const textHighlight = secondary;
   static const cardLight = Color(0xFFF9FAFE);
   static const cardDark = Color(0xFF303334);
+  static const darkBg = Color(0xFF023047);
+  static const darkNavBarBg = Color(0xFF012036);
+  static const darkSmallTile = Color(0xFF345369);
 }
 
 abstract class _LightColors {
@@ -21,8 +24,8 @@ abstract class _LightColors {
 }
 
 abstract class _DarkColors {
-  static const background = Color(0xFF1B1E1F);
-  static const card = AppColors.cardDark;
+  static const background = AppColors.darkBg;
+  static const card = AppColors.darkNavBarBg;
 }
 
 /// Reference to the application theme.

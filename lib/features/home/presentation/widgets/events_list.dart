@@ -1,8 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:ui';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:mitm4/core/router/router.gr.dart';
+import 'package:mitm4/core/theme.dart';
 
 import '../../model/train_event.dart';
 
@@ -23,7 +26,10 @@ class EventsList extends StatelessWidget {
             return ListTile(
                 leading: _getLeadingForEvent(),
                 title: Text(event.title),
-                subtitle: Text(event.author.name),
+                subtitle: Text(
+                  event.author.name,
+                  style: TextStyle(color: AppColors.accent),
+                ),
                 onTap: (() {
                   context.router.push(EventPageRoute(event: event));
                 }));

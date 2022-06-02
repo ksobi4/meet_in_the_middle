@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:mitm4/core/router/router.gr.dart';
+import 'package:mitm4/core/theme.dart';
 
 import '../../model/transfers.dart';
 
@@ -48,8 +49,8 @@ class OneTransferWidget extends StatelessWidget {
           title: ExpandionTaileTitle(
             transfer: transfer,
           ),
-          expandedColor: Colors.grey[800],
-
+          //expandedColor: Colors.grey[800],
+          baseColor: AppColors.darkNavBarBg,
           children: [ExnandedTaileBody(transfer: transfer)],
         ));
   }
@@ -85,11 +86,11 @@ class OneTrain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.grey[700],
+      color: AppColors.darkSmallTile,
       child: SizedBox(
         height: 62,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Column(
               children: [
@@ -142,7 +143,10 @@ class OneTrain extends StatelessWidget {
                 onPressed: () {
                   _onPressedMoreBtn(context, train);
                 },
-                child: const Text('Więcej'))
+                child: const Text(
+                  'Więcej',
+                  style: TextStyle(color: AppColors.accent),
+                ))
           ],
         ),
       ),
