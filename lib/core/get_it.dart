@@ -4,7 +4,9 @@ import 'package:hive/hive.dart';
 import 'package:mitm4/features/auth/service/auth_local_service.dart';
 import 'package:mitm4/features/auth/service/auth_service.dart';
 import 'package:mitm4/features/home/presentation/is_train_member_bloc/is_train_member_bloc.dart';
+import 'package:mitm4/features/home/presentation/user_trains_bloc/user_trains_bloc.dart';
 import 'package:mitm4/features/home/service/home_service.dart';
+import '../features/delay/service/delay_service.dart';
 import '../features/home/presentation/train_events_bloc/train_events_bloc.dart';
 import '../features/home/presentation/train_members_bloc/train_members_bloc.dart';
 import '../features/home/presentation/transfers_bloc/transfers_bloc.dart';
@@ -17,6 +19,7 @@ final sl = GetIt.instance;
 Future<void> setupGetIt() async {
   //services
   sl.registerLazySingleton<HomeService>(() => HomeService(client: sl()));
+  sl.registerLazySingleton<DelayService>(() => DelayService(client: sl()));
   sl.registerLazySingleton<AuthService>(
       () => AuthService(FirebaseAuth.instance, AuthLocalService()));
 
@@ -25,6 +28,7 @@ Future<void> setupGetIt() async {
   sl.registerLazySingleton<TrainEventsBloc>(() => TrainEventsBloc(sl()));
   sl.registerLazySingleton<TrainMembersBloc>(() => TrainMembersBloc(sl()));
   sl.registerLazySingleton<IsTrainMemberBloc>(() => IsTrainMemberBloc(sl()));
+  sl.registerLazySingleton<UserTrainsBloc>(() => UserTrainsBloc(sl()));
 
   //other
   sl.registerLazySingleton<Box>(() => Hive.box(config.hiveBoxName));

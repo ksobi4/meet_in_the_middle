@@ -4,12 +4,11 @@ import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:mitm4/core/theme.dart';
 import 'package:mitm4/features/home/presentation/is_train_member_bloc/is_train_member_bloc.dart';
-
 import 'package:mitm4/features/home/presentation/widgets/events_list.dart';
 import 'package:mitm4/features/home/presentation/widgets/members_list.dart';
 
@@ -37,21 +36,16 @@ class TrainPage extends StatefulWidget {
 class _TrainPageState extends State<TrainPage> {
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      return Text('aa');
-    }
-
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(title: const Text('Pociąg')),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: FloatingActionButton.extended(
-              backgroundColor: AppColors.accent,
-              onPressed: () {},
-              label: Text('Dołącz do przejazdu'),
-            ),
+            floatingActionButton: ChangingButton(
+                train: widget.train,
+                onPress: _onPress,
+                textSelected: 'Opuść przejazd',
+                textUnselected: 'Dołącz do przejazdu'),
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -66,33 +60,6 @@ class _TrainPageState extends State<TrainPage> {
                   MembersDisplay(
                     train: widget.train,
                   ),
-                  BlocProvider.value(
-                    value: sl<IsTrainMemberBloc>()
-                      ..add(IsTrainMemberEvent.get(user.uid, widget.train)),
-                    child: Builder(
-                      builder: (context) {
-                        return BlocBuilder<IsTrainMemberBloc,
-                            IsTrainMemberState>(builder: ((context, state) {
-                          if (state is IsTrainMemberInit) {
-                            return Container();
-                          } else if (state is IsTrainMemberLoading) {
-                            return Text('loading');
-                          } else if (state is IsTrainMemberError) {
-                            return Text('errror ${state.message}');
-                          } else if (state is IsTrainMemberLoaded) {
-                            return ChangingButton(
-                              isSelected: state.isTrainMember,
-                              textSelected: 'Wyjdź',
-                              textUnselected: 'Dołącz',
-                              onPress: _onPress,
-                            );
-                          } else {
-                            return Container();
-                          }
-                        }));
-                      },
-                    ),
-                  )
                 ],
               ),
             )));
@@ -109,21 +76,25 @@ class _TrainPageState extends State<TrainPage> {
         await hs.joinTrain(user.uid, widget.train);
       }
       sl<TrainMembersBloc>().add(TrainMembersEvent.get(widget.train));
+      setState(() {});
     }
   }
 }
 
 class ChangingButton extends StatefulWidget {
   final ValueChanged onPress;
-  bool isSelected;
   String textSelected;
   String textUnselected;
+  Train train;
+  bool isSelected = false;
+
   ChangingButton({
     Key? key,
     required this.onPress,
-    required this.isSelected,
     required this.textSelected,
     required this.textUnselected,
+    required this.train,
+    // this.isSelected = false,
   }) : super(key: key);
 
   @override
@@ -133,19 +104,52 @@ class ChangingButton extends StatefulWidget {
 class _ChangingButtonState extends State<ChangingButton> {
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: (() {
-        widget.onPress(widget.isSelected);
-        widget.isSelected = !widget.isSelected;
-        setState(() {});
-      }),
-      child:
-          Text(widget.isSelected ? widget.textSelected : widget.textUnselected),
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return Text('aa');
+    }
+
+    return BlocProvider.value(
+      value: sl<IsTrainMemberBloc>()
+        ..add(IsTrainMemberEvent.get(user.uid, widget.train)),
+      child: Builder(
+        builder: (context) {
+          return BlocBuilder<IsTrainMemberBloc, IsTrainMemberState>(
+              builder: ((context, state) {
+            if (state is IsTrainMemberInit) {
+              return Container();
+            } else if (state is IsTrainMemberLoading) {
+              return FloatingActionButton.extended(
+                backgroundColor: AppColors.accent,
+                onPressed: () {},
+                label: Text('                    '),
+              );
+            } else if (state is IsTrainMemberError) {
+              return Text('errror ${state.message}');
+            } else if (state is IsTrainMemberLoaded) {
+              widget.isSelected = state.isTrainMember;
+              return FloatingActionButton.extended(
+                backgroundColor: AppColors.accent,
+                onPressed: () {
+                  widget.onPress(widget.isSelected);
+                  widget.isSelected = !widget.isSelected;
+                  setState(() {});
+                },
+                label: Text(widget.isSelected
+                    ? widget.textSelected
+                    : widget.textUnselected),
+              );
+            } else {
+              return Container();
+            }
+          }));
+        },
+      ),
     );
   }
 }
 
-class EventsDisplay extends StatelessWidget {
+class EventsDisplay extends StatefulWidget {
   Train train;
   EventsDisplay({
     Key? key,
@@ -153,13 +157,18 @@ class EventsDisplay extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<EventsDisplay> createState() => _EventsDisplayState();
+}
+
+class _EventsDisplayState extends State<EventsDisplay> {
+  @override
   Widget build(BuildContext context) {
     return ExpansionTile(
       initiallyExpanded: true,
       title: Text('event'),
       children: [
         BlocProvider.value(
-          value: sl<TrainEventsBloc>()..add(TrainEventsEvent.get(train)),
+          value: sl<TrainEventsBloc>()..add(TrainEventsEvent.get(widget.train)),
           child: Builder(builder: ((context) {
             return BlocBuilder<TrainEventsBloc, TrainEventsState>(
               builder: (context, state) {
@@ -181,11 +190,19 @@ class EventsDisplay extends StatelessWidget {
         ),
         TextButton(
             onPressed: () {
-              context.router.push(AddEventPageRoute(train: train));
+              context.router
+                  .push(AddEventPageRoute(train: widget.train))
+                  .then((value) {
+                _onPop();
+              });
             },
             child: Text('Dodaj event')),
       ],
     );
+  }
+
+  void _onPop() {
+    sl<TrainEventsBloc>().add(TrainEventsEvent.get(widget.train));
   }
 }
 

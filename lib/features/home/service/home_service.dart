@@ -281,6 +281,22 @@ class HomeService {
     }
   }
 
+  Future<Either<Failure, List<Train>>> getTrainsForUser(String userId) async {
+    try {
+      List<Train> trainList = [];
+      DataSnapshot trainSnap = await db.ref('trains').get();
+      for (var element in trainSnap.children) {
+        Train train = Train.fromJson(jsonEncode(element.value));
+        trainList.add(train);
+      }
+
+      return Right(trainList);
+    } catch (e) {
+      log('HOME SERVICE getTrainsForUser $e');
+      return Left(Failure('HOME SERVICE getTrainsForUser $e'));
+    }
+  }
+
   Future<String> _getTrainKey(Train train) async {
     DataSnapshot snap = await db
         .ref('trains')

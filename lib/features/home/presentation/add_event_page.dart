@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mitm4/features/home/service/home_service.dart';
@@ -100,7 +101,7 @@ class _AddEventPageState extends State<AddEventPage> {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       log('doadj event press');
-      sl<HomeService>().createEvent(
+      await sl<HomeService>().createEvent(
           user.uid,
           widget.train,
           widget.titleController.text,
@@ -108,6 +109,7 @@ class _AddEventPageState extends State<AddEventPage> {
           widget.carriageController.text,
           widget.seatController.text,
           widget.currValue);
+      context.router.pop(user);
     }
   }
 }
