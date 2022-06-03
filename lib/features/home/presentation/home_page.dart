@@ -52,15 +52,12 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(
-                  onPressed: () {
-                    context.router.push(const FirstScreenRoute());
-                  },
-                  child: Text('Start')),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton.icon(
-                  onPressed: _onPress,
+                  onPressed: () {
+                    _onPress(user);
+                  },
                   label: Text('Wyszukaj przejazd'),
                   icon: Icon(Icons.search),
                   style: ElevatedButton.styleFrom(
@@ -76,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                     if (state is UserTrainsStateInit) {
                       return Container();
                     } else if (state is UserTrainsStateLoading) {
-                      return LoadingWidgetTrain(); //TODO: mroziu
+                      return LoadingWidgetTrain();
                     } else if (state is UserTrainsStateError) {
                       return Text('err ${state.message}');
                     } else if (state is UserTrainsStateLoaded) {
@@ -97,8 +94,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _onPress() async {
-    context.router.push(SearchTransfersPageRoute());
+  void _onPress(User user) async {
+    context.router.push(SearchTransfersPageRoute()).then((value) {
+      sl<UserTrainsBloc>().add(UserTrainsEvent.get(user.uid));
+      setState(() {});
+    });
   }
 }
 
@@ -121,6 +121,5 @@ class TrainListWidget extends StatelessWidget {
         itemCount: trainList.length,
       ),
     );
-    //TODO dla mrozia
   }
 }

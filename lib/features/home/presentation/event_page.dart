@@ -82,7 +82,8 @@ class _EventPageState extends State<EventPage> {
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
                 width: double.infinity,
-                child: Text('Wagon: ${event.carriage} Miejsce: ${event.seat}')),
+                child: Text(
+                    'Wagon: ${widget.event.carriage} Miejsce: ${widget.event.seat}')),
           ),
           const Padding(
             padding: EdgeInsets.all(8.0),

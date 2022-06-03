@@ -1,15 +1,15 @@
 import 'dart:developer';
-import 'dart:ffi';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_auth_ui/flutter_auth_ui.dart';
 // import 'package:lottie/lottie.dart';
-import 'package:mitm4/core/router/router.gr.dart';
+// import 'package:mitm4/core/router/router.gr.dart';
 import 'package:mitm4/main_page.dart';
+
+import '../../../core/router/router.gr.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key}) : super(key: key);
@@ -40,38 +40,40 @@ class _FirstScreenState extends State<FirstScreen> {
       ),
     );
   }
-}
 
-Future<void> _moveToLoginPage() async {
-  log('FIREBASE UI DO');
-  bool a = FirebaseAuth.instance.currentUser == null;
-  log('if user == null  $a');
-  // Set provider
-  final providers = [
-    AuthUiProvider.email,
-  ];
+  Future<void> _moveToLoginPage() async {
+    log('FIREBASE UI DO');
+    bool a = FirebaseAuth.instance.currentUser == null;
+    log('if user == null  $a');
+    // Set provider
+    final providers = [
+      AuthUiProvider.email,
+    ];
 
-  final result = await FlutterAuthUi.startUi(
-    items: providers,
-    tosAndPrivacyPolicy: const TosAndPrivacyPolicy(
-      tosUrl: "https://www.google.com",
-      privacyPolicyUrl: "https://www.google.com",
-    ),
-    androidOption: const AndroidOption(
-      enableSmartLock: false, // default true
-      showLogo: true, // default false
-      overrideTheme: true, // default false
-    ),
-    emailAuthOption: const EmailAuthOption(
-      requireDisplayName: false, // default true
-      enableMailLink: false, // default false
-      handleURL: '',
-      androidPackageName: '',
-      androidMinimumVersion: '',
-    ),
-  );
-  log('res= $result');
-  // if (!result) {
-  //   _moveToLoginPage();
-  // }
+    final result = await FlutterAuthUi.startUi(
+      items: providers,
+      tosAndPrivacyPolicy: const TosAndPrivacyPolicy(
+        tosUrl: "https://www.google.com",
+        privacyPolicyUrl: "https://www.google.com",
+      ),
+      androidOption: const AndroidOption(
+        enableSmartLock: false, // default true
+        showLogo: true, // default false
+        overrideTheme: true, // default false
+      ),
+      emailAuthOption: const EmailAuthOption(
+        requireDisplayName: false, // default true
+        enableMailLink: false, // default false
+        handleURL: '',
+        androidPackageName: '',
+        androidMinimumVersion: '',
+      ),
+    );
+    log('res= $result');
+    if (result) {
+      // _moveToLoginPage();
+      dispose();
+      context.router.replace(const MainPageRoute());
+    }
+  }
 }

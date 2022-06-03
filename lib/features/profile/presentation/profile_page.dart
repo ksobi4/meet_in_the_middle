@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mitm4/core/router/router.gr.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -23,6 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Text(user.email.toString()),
               TextButton(
                   onPressed: () {
+                    context.router.push(AuthWrapperRoute());
                     FirebaseAuth.instance.signOut();
                   },
                   child: const Text('LOG OUT'))
