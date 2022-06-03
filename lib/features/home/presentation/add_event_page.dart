@@ -11,14 +11,10 @@ import '../../../core/get_it.dart';
 import '../model/transfers.dart';
 
 class AddEventPage extends StatefulWidget {
-  TextEditingController titleController =
-      TextEditingController(text: 'event title1');
-  TextEditingController descController =
-      TextEditingController(text: 'event desc1');
-  TextEditingController carriageController =
-      TextEditingController(text: 'event carraige 1');
-  TextEditingController seatController =
-      TextEditingController(text: 'event seat 1');
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descController = TextEditingController();
+  TextEditingController carriageController = TextEditingController();
+  TextEditingController seatController = TextEditingController();
   String currValue = dropDownListItem[0];
   Train train;
 
@@ -40,7 +36,7 @@ class _AddEventPageState extends State<AddEventPage> {
     }
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(title: Text('Utwórz event')),
         body: Center(
           child: Column(
             children: [
@@ -48,27 +44,39 @@ class _AddEventPageState extends State<AddEventPage> {
               MyTextField(
                 label: 'Tytuł',
                 controller: widget.titleController,
+                minLinesVar: 1,
+                maxLinesVar: 1,
+                isNumeric: false,
               ),
               MyTextField(
                 label: 'Opis',
                 controller: widget.descController,
+                minLinesVar: 3,
+                maxLinesVar: 5,
+                isNumeric: false,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   MyTextField(
                     label: 'Wagon',
                     controller: widget.carriageController,
                     width: 100,
+                    minLinesVar: 1,
+                    maxLinesVar: 1,
+                    isNumeric: true,
                   ),
                   MyTextField(
                     label: 'Miejsce',
                     controller: widget.seatController,
                     width: 100,
+                    minLinesVar: 1,
+                    maxLinesVar: 1,
+                    isNumeric: true,
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 6),
                     child: DropdownButton<String>(
                       value: widget.currValue,
                       items: dropDownListItem
@@ -126,10 +134,16 @@ class MyTextField extends StatelessWidget {
   String label;
   TextEditingController controller;
   int width;
+  int minLinesVar;
+  int maxLinesVar;
+  bool isNumeric;
   MyTextField({
     Key? key,
     required this.label,
     required this.controller,
+    required this.minLinesVar,
+    required this.maxLinesVar,
+    required this.isNumeric,
     this.width = -1,
   }) : super(key: key);
 
@@ -141,7 +155,10 @@ class MyTextField extends StatelessWidget {
         width: width == -1 ? null : width.toDouble(),
         child: TextField(
           controller: controller,
-          keyboardType: TextInputType.multiline,
+          keyboardType:
+              isNumeric ? TextInputType.number : TextInputType.multiline,
+          minLines: minLinesVar,
+          maxLines: maxLinesVar,
           decoration: InputDecoration(
             labelText: label,
             border: const OutlineInputBorder(),

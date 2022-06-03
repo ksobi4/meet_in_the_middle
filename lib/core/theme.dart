@@ -19,7 +19,7 @@ abstract class AppColors {
   static const chessEventCard = Color(0xFF00b894);
   static const cardsEventCard = Color(0xFFe17055);
   static const talkEventCard = Color(0xFFff7675);
-  static const partyEventCard = Color(0xFFfd79a8);
+  static const partyEventCard = Color(0xFFffeaa7);
   static const customEventCard = Color(0xFFdfe6e9);
 }
 

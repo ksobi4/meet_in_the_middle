@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:mitm4/core/theme.dart';
+import 'package:mitm4/core/widgets/loading_widget.dart';
 import 'package:mitm4/features/home/presentation/is_train_member_bloc/is_train_member_bloc.dart';
 import 'package:mitm4/features/home/presentation/widgets/events_list.dart';
 import 'package:mitm4/features/home/presentation/widgets/members_list.dart';
@@ -173,7 +174,7 @@ class _EventsDisplayState extends State<EventsDisplay> {
             return BlocBuilder<TrainEventsBloc, TrainEventsState>(
               builder: (context, state) {
                 if (state is TrainEventsLoading) {
-                  return CircularProgressIndicator();
+                  return LoadingWidgetTrain();
                 } else if (state is TrainEventsInit) {
                   return const Text('init');
                 } else if (state is TrainEventsLoaded) {
@@ -242,7 +243,7 @@ class MembersDisplay extends StatelessWidget {
                 return BlocBuilder<TrainMembersBloc, TrainMembersState>(
                     builder: ((context, state) {
                   if (state is TrainMembersLoading) {
-                    return CircularProgressIndicator();
+                    return LoadingWidgetTrain();
                   } else if (state is TrainMembersInit) {
                     return Text('init data');
                   } else if (state is TrainMembersLoaded) {
