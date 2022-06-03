@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_auth_ui/flutter_auth_ui.dart';
-import 'package:lottie/lottie.dart';
+// import 'package:lottie/lottie.dart';
 import 'package:mitm4/core/router/router.gr.dart';
 import 'package:mitm4/main_page.dart';
 
