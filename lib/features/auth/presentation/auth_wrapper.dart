@@ -25,7 +25,8 @@ class AuthWrapper extends StatelessWidget {
       if (user == null) {
         log('1USER LOG OUT');
         // context.router.replace(AuthWrapperRoute());
-        _moveToLoginPage();
+        context.router.replace(const FirstScreenRoute());
+        //_moveToLoginPage();
       } else {
         //add user if not exist in ;db
         final db = FirebaseDatabase.instance;

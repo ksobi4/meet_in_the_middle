@@ -68,6 +68,27 @@ class _EventPageState extends State<EventPage> {
             child: SizedBox(
               width: double.infinity,
               child: Text(
+                'Miejsce',
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+                width: double.infinity,
+                child: Text('Wagon: ${event.carriage} Miejsce: ${event.seat}')),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: Text(
                 'Twórca',
                 textAlign: TextAlign.start,
                 style: TextStyle(

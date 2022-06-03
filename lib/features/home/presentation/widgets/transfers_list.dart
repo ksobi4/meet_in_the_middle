@@ -70,6 +70,7 @@ class ExnandedTaileBody extends StatelessWidget {
     for (var train in transfer.trains) {
       list.add(OneTrain(
         train: train,
+        isHome: false,
       ));
     }
     return Column(children: list);
@@ -78,31 +79,34 @@ class ExnandedTaileBody extends StatelessWidget {
 
 class OneTrain extends StatelessWidget {
   Train train;
+  bool isHome;
   OneTrain({
     Key? key,
     required this.train,
+    required this.isHome,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.darkSmallTile,
+      color: isHome ? AppColors.darkNavBarBg : AppColors.darkSmallTile,
       child: SizedBox(
         height: 62,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _generateCarrierImage(train.carrier),
                 Text(
                   train.trainNumber,
                   textAlign: TextAlign.center,
                 ),
-                Text(
-                  train.name == '' ? '-=-' : train.name,
-                  textAlign: TextAlign.center,
-                )
+                // Text(
+                //   train.name == '' ? '-=-' : train.name,
+                //   textAlign: TextAlign.center,
+                // )
               ],
             ),
             Column(
