@@ -27,51 +27,58 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  flutter:
-    sdk: flutter
+  auto_route: null
+  cached_network_image: ^3.2.1
+  cloud_firestore: ^3.1.15
 
   cupertino_icons: ^1.0.2
+  dartz: ^0.10.1
+  dio: ^4.0.6
+  expansion_tile_card: ^2.0.0
+  faker: ^2.0.0
+  firebase_auth: ^3.3.18
   firebase_core: ^1.17.0
   firebase_database: ^9.0.14
-  cloud_firestore: ^3.1.15
-  auto_route:
-  salomon_bottom_bar:
-  get_it: ^7.2.0
-  firebase_auth: ^3.3.18
+  firebase_messaging: ^11.4.1
+  flutter:
+    sdk: flutter
+  flutter_auth_ui: ^3.0.0
   flutter_bloc: ^8.0.1
+  flutter_datetime_picker: ^1.5.1
+  flutter_typeahead: ^4.0.0
+  font_awesome_flutter: ^10.1.0
+  freezed_annotation: ^2.0.3
+  get_it: ^7.2.0
+  google_fonts: ^3.0.1
   hive: ^2.2.1
   hive_flutter: ^1.1.0
-  dartz: ^0.10.1
-  freezed_annotation: ^2.0.3
-  flutter_auth_ui: ^3.0.0
-  flutter_typeahead: ^4.0.0
-  dio: ^4.0.6
-  json_annotation: ^4.5.0
   intl: ^0.17.0
-  flutter_datetime_picker: ^1.5.1
-  expansion_tile_card: ^2.0.0
-  uuid: ^3.0.6
-  firebase_messaging: ^11.4.1
-  google_fonts: ^3.0.1
-  faker: ^2.0.0
   jiffy: ^5.0.0
-  cached_network_image: ^3.2.1
+  json_annotation: ^4.5.0
+  lottie: ^1.3.0
+  salomon_bottom_bar: null
+  uuid: ^3.0.6
+  video_player: ^2.4.2
   wakelock: ^0.6.1+2
-  font_awesome_flutter: ^10.1.0
 
 dev_dependencies:
+  auto_route_generator: null
+  build_runner: null
+  flutter_launcher_icons: ^0.9.2
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-
-  flutter_lints: ^2.0.0
-  auto_route_generator:
-  build_runner:
-  hive_generator: ^1.1.3
   freezed: ^2.0.3+1
+  hive_generator: ^1.1.3
+
+#  flutter_icons:
+ # image_path: "assets/logo.png"
+  #android: true
+  #ios: true
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -83,14 +90,13 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/cos.gif
+    - assets/cum.gif
+    - assets/logo.png
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
