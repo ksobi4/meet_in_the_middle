@@ -3,6 +3,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:mitm4/core/router/router.gr.dart';
 import 'package:mitm4/core/theme.dart';
 
@@ -33,9 +34,11 @@ List<FaIcon> eventIcons = const [
 
 class EventsList extends StatelessWidget {
   List<TrainEvent> eventList;
+  final VoidCallback reloadFunction;
   EventsList({
     Key? key,
     required this.eventList,
+    required this.reloadFunction,
   }) : super(key: key);
 
   @override
@@ -53,19 +56,10 @@ class EventsList extends StatelessWidget {
             itemBuilder: ((context, index) {
               TrainEvent event = eventList[index];
               return _EventCard(
+                reloadFunction: reloadFunction,
                 eventType: _eventTypeCoverter(event.eventType),
                 event: event,
               );
-              // return ListTile(
-              //     leading: _getLeadingForEvent(),
-              //     title: Text(event.title),
-              //     subtitle: Text(
-              //       event.author.name,
-              //       style: TextStyle(color: AppColors.accent),
-              //     ),
-              //     onTap: (() {
-              //       context.router.push(EventPageRoute(event: event));
-              //     }));
             }),
             itemCount: eventList.length),
       ),
@@ -75,10 +69,12 @@ class EventsList extends StatelessWidget {
 
 class _EventCard extends StatelessWidget {
   EventType eventType;
+  final VoidCallback reloadFunction;
   TrainEvent event;
   _EventCard({
     Key? key,
     required this.eventType,
+    required this.reloadFunction,
     required this.event,
   }) : super(key: key);
 
@@ -93,7 +89,9 @@ class _EventCard extends StatelessWidget {
           height: 100,
           child: IconButton(
               onPressed: () {
-                context.router.push(EventPageRoute(event: event));
+                context.router.push(EventPageRoute(event: event)).then((value) {
+                  reloadFunction();
+                });
               },
               iconSize: 55,
               color: Colors.black,

@@ -10,6 +10,7 @@ import 'package:hive/hive.dart';
 
 import '../../../core/get_it.dart';
 import '../../../core/router/router.gr.dart';
+import '../../../core/widgets/loading_widget.dart';
 
 class AuthWrapper extends StatelessWidget {
   AuthWrapper({Key? key}) : super(key: key);
@@ -48,10 +49,7 @@ class AuthWrapper extends StatelessWidget {
       body: Center(
           child: Column(
         children: const [
-          Text(
-            'WRAPPER',
-            style: TextStyle(fontSize: 20),
-          )
+          LoadingWidgetTrain(),
         ],
       )),
     );

@@ -17,24 +17,61 @@ import '../../../core/get_it.dart';
 import '../../../core/router/router.gr.dart';
 import '../model/transfers.dart';
 import '../service/home_service.dart';
+import 'is_train_in_db_bloc/is_train_in_db_bloc.dart';
 import 'train_events_bloc/train_events_bloc.dart';
 import 'train_members_bloc/train_members_bloc.dart';
 
-class TrainPage extends StatefulWidget {
+class TrainPage extends StatelessWidget {
   Train train;
-
-  bool buttonState = true;
-  String currentButtonText = 'Dołącz';
   TrainPage({
     Key? key,
     required this.train,
   }) : super(key: key);
 
   @override
-  State<TrainPage> createState() => _TrainPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider.value(
+      value: sl<IsTrainInDbBloc>()..add(IsTrainInDbEvent.check(train)),
+      child: Builder(builder: ((context) {
+        return BlocBuilder<IsTrainInDbBloc, IsTrainInDbState>(
+            builder: ((context, state) {
+          if (state is IsTrainInDbStateLoading) {
+            return Scaffold(
+              body: Center(
+                  child: Column(
+                children: [LoadingWidgetTrain()],
+              )),
+            );
+          } else if (state is IsTrainInDbStateInit) {
+            return Text('init data');
+          } else if (state is IsTrainInDbStateLoaded) {
+            return TrainPageLoaded(train: train);
+          } else if (state is IsTrainInDbStateError) {
+            return Text('error ${state.message}');
+          } else {
+            return const Text('nic');
+          }
+        }));
+      })),
+    );
+  }
 }
 
-class _TrainPageState extends State<TrainPage> {
+class TrainPageLoaded extends StatefulWidget {
+  Train train;
+
+  bool buttonState = true;
+  String currentButtonText = 'Dołącz';
+  TrainPageLoaded({
+    Key? key,
+    required this.train,
+  }) : super(key: key);
+
+  @override
+  State<TrainPageLoaded> createState() => _TrainPageState();
+}
+
+class _TrainPageState extends State<TrainPageLoaded> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -57,13 +94,18 @@ class _TrainPageState extends State<TrainPage> {
                   InfoDisplay(
                     train: widget.train,
                   ),
-                  EventsDisplay(train: widget.train),
+                  EventsDisplay(
+                      train: widget.train, reloadFunction: reloadFunction),
                   MembersDisplay(
                     train: widget.train,
                   ),
                 ],
               ),
             )));
+  }
+
+  void reloadFunction() {
+    setState(() {});
   }
 
   void _onPress(isPressed) async {
@@ -151,9 +193,11 @@ class _ChangingButtonState extends State<ChangingButton> {
 }
 
 class EventsDisplay extends StatefulWidget {
+  final VoidCallback reloadFunction;
   Train train;
   EventsDisplay({
     Key? key,
+    required this.reloadFunction,
     required this.train,
   }) : super(key: key);
 
@@ -179,7 +223,8 @@ class _EventsDisplayState extends State<EventsDisplay> {
                   return const Text('init');
                 } else if (state is TrainEventsLoaded) {
                   if (state.eventList.isEmpty) return Text('No events');
-                  return EventsList(eventList: state.eventList);
+                  return EventsList(
+                      eventList: state.eventList, reloadFunction: _onPop);
                 } else if (state is TrainEventsError) {
                   return Text(state.message);
                 } else {
@@ -204,6 +249,7 @@ class _EventsDisplayState extends State<EventsDisplay> {
 
   void _onPop() {
     sl<TrainEventsBloc>().add(TrainEventsEvent.get(widget.train));
+    widget.reloadFunction();
   }
 }
 
@@ -224,6 +270,8 @@ class InfoDisplay extends StatelessWidget {
 }
 
 class MembersDisplay extends StatelessWidget {
+  bool isFirst = true;
+
   Train train;
   MembersDisplay({
     Key? key,

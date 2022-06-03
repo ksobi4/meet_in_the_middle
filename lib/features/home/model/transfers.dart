@@ -103,8 +103,6 @@ class Train {
   }
 
   factory Train.fromMap(Map<String, dynamic> map) {
-    log('in trainFromMap ${map["members"]}');
-
     return Train(
       distance: map['distance'] ?? '',
       startStation: map['startStation'] ?? '',

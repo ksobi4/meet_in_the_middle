@@ -7,6 +7,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mitm4/core/errors/failure.dart';
+import 'package:mitm4/features/home/presentation/train_events_bloc/train_events_bloc.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../core/config/config.dart';
@@ -23,6 +24,7 @@ class HomeService {
 
   final db = FirebaseDatabase.instance;
 
+  //Staitons and Transfers
   Future<List<String>> getStations(String stringPart) async {
     try {
       Response res = await client.dio.get('$getStationUrl$stringPart');
@@ -60,6 +62,55 @@ class HomeService {
     }
   }
 
+  // Trains
+  Future<Either<Failure, List<Train>>> getTrainsForUser(String userId) async {
+    try {
+      List<Train> trainList = [];
+      DataSnapshot trainSnap = await db.ref('trains').get();
+      for (var element in trainSnap.children) {
+        bool check = false;
+        var memberIdList = jsonDecode(
+            jsonEncode((await element.child('members').ref.get()).value));
+
+        for (String id in memberIdList) {
+          if (id == userId) {
+            check = true;
+          }
+        }
+
+        if (check) {
+          Train train = Train.fromJson(jsonEncode(element.value));
+          trainList.add(train);
+        }
+      }
+
+      return Right(trainList);
+    } catch (e) {
+      log('HOME SERVICE getTrainsForUser $e');
+      return Left(Failure('HOME SERVICE getTrainsForUser $e'));
+    }
+  }
+
+  Future<Either<Failure, bool>> isTrainInDB(Train train) async {
+    try {
+      DataSnapshot snap = await db
+          .ref('trains')
+          .orderByChild('trainNumber')
+          .equalTo(train.trainNumber)
+          .get();
+      if (!snap.exists) {
+        String uuid = const Uuid().v4();
+        db.ref('trains/$uuid').set(jsonDecode(train.toJson()));
+        db.ref('trains/$uuid/members').set(['null']);
+        return const Right(false);
+      }
+      return const Right(true);
+    } catch (e) {
+      log('HOME SERVICE addTrainToDB ${e.toString()}');
+      return Left(Failure('HOME SERVICE addTrainToDB ${e.toString()}'));
+    }
+  }
+
   Future<Either<Failure, List<User>>> getTrainMembers(Train train) async {
     try {
       DataSnapshot snap = await db
@@ -93,55 +144,32 @@ class HomeService {
     }
   }
 
-  Future<Either<Failure, List<TrainEvent>>> getTrainEvents(Train train) async {
+  Future<Either<Failure, void>> leaveTrain(String userId, Train train) async {
     try {
-      DataSnapshot trainSnap = await db
+      DataSnapshot snap = await db
           .ref('trains')
           .orderByChild('trainNumber')
           .equalTo(train.trainNumber)
           .get();
-      if (trainSnap.exists) {
-        Map<String, dynamic> jsonTrain =
-            jsonDecode(jsonEncode(trainSnap.value));
-        var key = trainSnap.children.first.key.toString();
-        Train train = Train.fromJson(jsonEncode(jsonTrain[key]));
-
-        List<TrainEvent> eventsList = [];
-
-        for (String eventId in train.events) {
-          DataSnapshot eventSnap = await db.ref('events/$eventId').get();
-          if (eventSnap.exists && eventId != 'null') {
-            Map<String, dynamic> eventJson =
-                jsonDecode(jsonEncode(eventSnap.value));
-
-            List membersList = [];
-            for (String? userId in eventJson["members"]) {
-              if (userId != "null" && userId != null) {
-                User? user = await _getUser(userId);
-                if (user != null) {
-                  membersList.add(user.toMap());
-                }
-              }
-            }
-            eventJson["members"] = membersList;
-
-            String authorUserId = eventJson["author"];
-            User? authorUser = await _getUser(authorUserId);
-            if (authorUser != null) {
-              eventJson["author"] = jsonDecode(authorUser.toJson());
-            }
-            TrainEvent event = TrainEvent.fromJson(jsonEncode(eventJson));
-            eventsList.add(event);
-          }
-        }
-
-        return Right(eventsList);
+      var key = snap.children.first.key.toString();
+      log('key =$key');
+      DatabaseReference temp = db.ref('trains/$key').child('members');
+      List<dynamic> memberIdList =
+          jsonDecode(jsonEncode((await temp.get()).value));
+      bool check = false;
+      for (String id in memberIdList) {
+        if (id == userId) check = true;
+      }
+      if (check) {
+        memberIdList.remove(userId);
+        await db.ref('trains/$key/members').set(memberIdList);
+        return const Right(true);
       } else {
-        return const Right([]);
+        return const Right(false);
       }
     } catch (e) {
-      log('HOME SERVICE getTrainEvents $e');
-      return Left(Failure('HOME SERVICE getTrainEvents $e'));
+      log('HOME SERVICE leaveTrain $e');
+      return Left(Failure(e.toString()));
     }
   }
 
@@ -193,32 +221,118 @@ class HomeService {
     }
   }
 
-  Future<Either<Failure, void>> leaveTrain(String userId, Train train) async {
+  //Events
+
+  Future<Either<Failure, bool>> leaveEvent(
+      String userId, TrainEvent event) async {
     try {
-      DataSnapshot snap = await db
-          .ref('trains')
-          .orderByChild('trainNumber')
-          .equalTo(train.trainNumber)
-          .get();
-      var key = snap.children.first.key.toString();
-      log('key =$key');
-      DatabaseReference temp = db.ref('trains/$key').child('members');
-      List<dynamic> memberIdList =
+      DatabaseReference temp = await db.ref('events/${event.id}/members');
+      List<dynamic> eventMembers =
           jsonDecode(jsonEncode((await temp.get()).value));
       bool check = false;
-      for (String id in memberIdList) {
+      for (String id in eventMembers) {
         if (id == userId) check = true;
       }
       if (check) {
-        memberIdList.remove(userId);
-        await db.ref('trains/$key/members').set(memberIdList);
+        eventMembers.remove(userId);
+        await db.ref('events/${event.id}/members').set(eventMembers);
         return const Right(true);
       } else {
         return const Right(false);
       }
     } catch (e) {
-      log('HOME SERVICE leaveTrain $e');
+      log('HOME SERVICE leaveEvent $e');
       return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, bool>> joinEvent(
+      String userId, TrainEvent event) async {
+    try {
+      DatabaseReference temp = await db.ref('events/${event.id}/members');
+      var eventMembers = jsonDecode(jsonEncode((await temp.get()).value));
+      eventMembers.add(userId);
+      await db.ref('events/${event.id}/members').set(eventMembers);
+
+      return const Right(true);
+    } catch (e) {
+      log('HOME SERVICE joinEvent $e');
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, List<TrainEvent>>> getTrainEvents(Train train) async {
+    try {
+      DataSnapshot trainSnap = await db
+          .ref('trains')
+          .orderByChild('trainNumber')
+          .equalTo(train.trainNumber)
+          .get();
+      if (trainSnap.exists) {
+        Map<String, dynamic> jsonTrain =
+            jsonDecode(jsonEncode(trainSnap.value));
+        var key = trainSnap.children.first.key.toString();
+        Train train = Train.fromJson(jsonEncode(jsonTrain[key]));
+
+        List<TrainEvent> eventsList = [];
+
+        for (String eventId in train.events) {
+          DataSnapshot eventSnap = await db.ref('events/$eventId').get();
+          if (eventSnap.exists && eventId != 'null') {
+            Map<String, dynamic> eventJson =
+                jsonDecode(jsonEncode(eventSnap.value));
+
+            //generate members list
+            List membersList = [];
+            for (String? userId in eventJson["members"]) {
+              if (userId != "null" && userId != null) {
+                User? user = await _getUser(userId);
+                if (user != null) {
+                  membersList.add(user.toMap());
+                }
+              }
+            }
+            eventJson["members"] = membersList;
+
+            //generate author
+            String authorUserId = eventJson["author"];
+            User? authorUser = await _getUser(authorUserId);
+            if (authorUser != null) {
+              eventJson["author"] = authorUser.toMap();
+            }
+            // log('ev author= ${eventJson}');
+            TrainEvent event = TrainEvent.fromJson(jsonEncode(eventJson));
+            eventsList.add(event);
+          }
+        }
+
+        return Right(eventsList);
+      } else {
+        return const Right([]);
+      }
+    } catch (e) {
+      log('HOME SERVICE getTrainEvents $e');
+      return Left(Failure('HOME SERVICE getTrainEvents $e'));
+    }
+  }
+
+  Future<Either<Failure, bool>> isEventMember(
+      String userId, TrainEvent event) async {
+    try {
+      DatabaseReference temp = await db.ref('events/${event.id}/members');
+      var eventMemberList = jsonDecode(jsonEncode((await temp.get()).value));
+      bool check = false;
+      for (String eventMember in eventMemberList) {
+        if (userId == eventMember) check = true;
+      }
+      if (check) {
+        return const Right(true);
+      } else {
+        return const Right(false);
+      }
+    } catch (e) {
+      log('HOME SERVICE isEventMember $e');
+      return Left(Failure('HOME SERVICE isEventMember $e'));
     }
   }
 
@@ -281,21 +395,7 @@ class HomeService {
     }
   }
 
-  Future<Either<Failure, List<Train>>> getTrainsForUser(String userId) async {
-    try {
-      List<Train> trainList = [];
-      DataSnapshot trainSnap = await db.ref('trains').get();
-      for (var element in trainSnap.children) {
-        Train train = Train.fromJson(jsonEncode(element.value));
-        trainList.add(train);
-      }
-
-      return Right(trainList);
-    } catch (e) {
-      log('HOME SERVICE getTrainsForUser $e');
-      return Left(Failure('HOME SERVICE getTrainsForUser $e'));
-    }
-  }
+  //others helpers
 
   Future<String> _getTrainKey(Train train) async {
     DataSnapshot snap = await db
@@ -316,6 +416,7 @@ class HomeService {
 
     if (snapUser.exists && userId != 'null') {
       Map<String, dynamic> userJson = jsonDecode(jsonEncode(snapUser.value));
+      userJson["uuid"] = userId;
 
       return User.fromJson(jsonEncode(userJson));
     } else {
