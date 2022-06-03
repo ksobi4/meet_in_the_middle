@@ -44,30 +44,33 @@ class EventsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 250,
-      child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              //childAspectRatio: 3 / 2,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
-              crossAxisCount: 3),
-          itemBuilder: ((context, index) {
-            TrainEvent event = eventList[index];
-            return _EventCard(
-              eventType: _eventTypeCoverter(event.eventType),
-              event: event,
-            );
-            // return ListTile(
-            //     leading: _getLeadingForEvent(),
-            //     title: Text(event.title),
-            //     subtitle: Text(
-            //       event.author.name,
-            //       style: TextStyle(color: AppColors.accent),
-            //     ),
-            //     onTap: (() {
-            //       context.router.push(EventPageRoute(event: event));
-            //     }));
-          }),
-          itemCount: eventList.length),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //childAspectRatio: 3 / 2,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                crossAxisCount: 3),
+            itemBuilder: ((context, index) {
+              TrainEvent event = eventList[index];
+              return _EventCard(
+                eventType: _eventTypeCoverter(event.eventType),
+                event: event,
+              );
+              // return ListTile(
+              //     leading: _getLeadingForEvent(),
+              //     title: Text(event.title),
+              //     subtitle: Text(
+              //       event.author.name,
+              //       style: TextStyle(color: AppColors.accent),
+              //     ),
+              //     onTap: (() {
+              //       context.router.push(EventPageRoute(event: event));
+              //     }));
+            }),
+            itemCount: eventList.length),
+      ),
     );
   }
 }
@@ -98,7 +101,7 @@ class _EventCard extends StatelessWidget {
               onPressed: () {
                 context.router.push(EventPageRoute(event: event));
               },
-              iconSize: 35,
+              iconSize: 55,
               color: Colors.black,
               icon: eventIcons[eventType.index])),
     );
@@ -107,13 +110,13 @@ class _EventCard extends StatelessWidget {
 
 _eventTypeCoverter(String EventTypeInString) {
   switch (EventTypeInString) {
-    case 'cards':
+    case 'Karty':
       return EventType.cards;
-    case 'chess':
+    case 'Szachy':
       return EventType.chess;
-    case 'talk':
+    case 'Rozmowa':
       return EventType.talk;
-    case 'party':
+    case 'Impreza':
       return EventType.party;
     default:
       return EventType.custom;
