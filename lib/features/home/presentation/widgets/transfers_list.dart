@@ -3,6 +3,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
+
 import 'package:mitm4/core/router/router.gr.dart';
 import 'package:mitm4/core/theme.dart';
 
@@ -71,6 +72,7 @@ class ExnandedTaileBody extends StatelessWidget {
       list.add(OneTrain(
         train: train,
         isHome: false,
+        reloadFunction: () {},
       ));
     }
     return Column(children: list);
@@ -80,10 +82,12 @@ class ExnandedTaileBody extends StatelessWidget {
 class OneTrain extends StatelessWidget {
   Train train;
   bool isHome;
+  final VoidCallback reloadFunction;
   OneTrain({
     Key? key,
     required this.train,
     required this.isHome,
+    required this.reloadFunction,
   }) : super(key: key);
 
   @override
@@ -158,7 +162,9 @@ class OneTrain extends StatelessWidget {
   }
 
   void _onPressedMoreBtn(BuildContext context, train) {
-    context.router.push(TrainPageRoute(train: train));
+    context.router.push(TrainPageRoute(train: train)).then((value) {
+      reloadFunction();
+    });
   }
 }
 

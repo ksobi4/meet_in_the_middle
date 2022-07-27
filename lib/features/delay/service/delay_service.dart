@@ -21,7 +21,8 @@ class DelayService {
   Future<Either<Failure, List<TrainDelay>>> getDelaiedTrainsForStaion(
       String stationName) async {
     try {
-      Response res = await client.dio.get('$baseDelayUrl/$stationName');
+      Response res = await client.dio
+          .post('$baseUrl/delays', data: {'station': stationName});
       if (res.statusCode == 200) {
         var list = res.data;
         List<TrainDelay> outputList = [];

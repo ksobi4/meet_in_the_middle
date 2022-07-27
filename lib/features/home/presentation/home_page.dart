@@ -80,7 +80,9 @@ class _HomePageState extends State<HomePage> {
                       if (state.trainList.isEmpty) {
                         return const Text('Brak dodanych pociągów');
                       }
-                      return TrainListWidget(trainList: state.trainList);
+                      return TrainListWidget(
+                          trainList: state.trainList,
+                          reloadFunction: reloadFunction);
                     } else {
                       return Container();
                     }
@@ -100,12 +102,22 @@ class _HomePageState extends State<HomePage> {
       setState(() {});
     });
   }
+
+  void reloadFunction() {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      sl<UserTrainsBloc>().add(UserTrainsEvent.get(user.uid));
+      setState(() {});
+    }
+  }
 }
 
 class TrainListWidget extends StatelessWidget {
+  final VoidCallback reloadFunction;
   List<Train> trainList;
   TrainListWidget({
     Key? key,
+    required this.reloadFunction,
     required this.trainList,
   }) : super(key: key);
 
@@ -116,7 +128,8 @@ class TrainListWidget extends StatelessWidget {
       child: ListView.builder(
         itemBuilder: ((context, index) {
           Train train = trainList[index];
-          return OneTrain(train: train, isHome: true);
+          return OneTrain(
+              train: train, isHome: true, reloadFunction: reloadFunction);
         }),
         itemCount: trainList.length,
       ),
