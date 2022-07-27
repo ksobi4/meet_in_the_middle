@@ -1,45 +1,60 @@
 import 'dart:convert';
 
 class TrainDelay {
-  String leaveHour;
-  String delayTime;
+  String name;
+  String trainNumber;
+  String carrier;
+  String date;
+
   String startStation;
   String endStation;
-  String trainNumber;
-  String name;
-  String carrier;
+
+  String arrivalTime;
+  String leavingTime;
+
+  String arrivalDelay;
+  String leavingDelay;
 
   TrainDelay({
-    required this.leaveHour,
-    required this.delayTime,
+    required this.name,
+    required this.trainNumber,
+    required this.carrier,
+    required this.date,
     required this.startStation,
     required this.endStation,
-    required this.trainNumber,
-    required this.name,
-    required this.carrier,
+    required this.arrivalTime,
+    required this.leavingTime,
+    required this.arrivalDelay,
+    required this.leavingDelay,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'leaveHour': leaveHour,
-      'delayTime': delayTime,
+      'name': name,
+      'trainNumber': trainNumber,
+      'carrier': carrier,
+      'date': date,
       'startStation': startStation,
       'endStation': endStation,
-      'trainNumber': trainNumber,
-      'name': name,
-      'carrier': carrier,
+      'arrivalTime': arrivalTime,
+      'leavingTime': leavingTime,
+      'arrivalDelay': arrivalDelay,
+      'leavingDelay': leavingDelay,
     };
   }
 
   factory TrainDelay.fromMap(Map<String, dynamic> map) {
     return TrainDelay(
-      leaveHour: map['leaveHour'] ?? '',
-      delayTime: map['delayTime'] ?? '',
+      name: map['name'] ?? '',
+      trainNumber: map['trainNumber'] ?? '',
+      carrier: map['carrier'] ?? '',
+      date: map['date'] ?? '',
       startStation: map['startStation'] ?? '',
       endStation: map['endStation'] ?? '',
-      trainNumber: map['trainNumber'] ?? '',
-      name: map['name'] ?? '',
-      carrier: map['carrier'] ?? '',
+      arrivalTime: map['arrivalTime'] ?? '',
+      leavingTime: map['leavingTime'] ?? '',
+      arrivalDelay: map['arrivalDelay'] ?? '',
+      leavingDelay: map['leavingDelay'] ?? '',
     );
   }
 

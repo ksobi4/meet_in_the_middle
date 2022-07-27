@@ -197,7 +197,7 @@ class _ChangingButtonState extends State<ChangingButton> {
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
     if (user == null) {
-      return Text('aa');
+      return const Text('aa');
     }
 
     return BlocProvider.value(
@@ -213,7 +213,7 @@ class _ChangingButtonState extends State<ChangingButton> {
               return FloatingActionButton.extended(
                 backgroundColor: AppColors.accent,
                 onPressed: () {},
-                label: Text('                    '),
+                label: const Text('                    '),
               );
             } else if (state is IsEventMemberError) {
               return Text('errror ${state.message}');

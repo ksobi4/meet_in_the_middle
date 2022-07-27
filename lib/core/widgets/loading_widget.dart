@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class LoadingWidgetTrain extends StatelessWidget {
   const LoadingWidgetTrain({Key? key}) : super(key: key);

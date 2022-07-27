@@ -5,9 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_auth_ui/flutter_auth_ui.dart';
-// import 'package:lottie/lottie.dart';
-// import 'package:mitm4/core/router/router.gr.dart';
-import 'package:mitm4/main_page.dart';
 
 import '../../../core/router/router.gr.dart';
 
@@ -26,7 +23,7 @@ class _FirstScreenState extends State<FirstScreen> {
   }
 
   _navigateToRegistration() async {
-    await Future.delayed(Duration(seconds: 20), () {});
+    await Future.delayed(const Duration(seconds: 20), () {});
     //context.router.push(const MainPageRoute());
     _moveToLoginPage();
   }

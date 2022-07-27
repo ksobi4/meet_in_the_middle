@@ -36,7 +36,7 @@ class _AddEventPageState extends State<AddEventPage> {
     }
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('Utwórz event')),
+        appBar: AppBar(title: const Text('Utwórz event')),
         body: Center(
           child: Column(
             children: [

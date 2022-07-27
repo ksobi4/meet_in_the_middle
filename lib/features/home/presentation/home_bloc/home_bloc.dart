@@ -3,17 +3,13 @@ import 'dart:async';
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:mitm4/features/home/service/home_service.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../core/errors/failure.dart';
-import '../../model/train_event.dart';
 import '../../model/transfers.dart';
-import '../../model/user.dart';
 
 part 'home_bloc.freezed.dart';
 part 'home_event.dart';
