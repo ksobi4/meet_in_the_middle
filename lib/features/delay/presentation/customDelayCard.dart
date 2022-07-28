@@ -25,45 +25,53 @@ class CustomDelayCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         child: Row(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(delay.trainNumber),
-                Text(delay.name),
-                Text(delay.endStation),
-              ],
+            Expanded(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(delay.trainNumber),
+                  FittedBox(
+                    child: Text(
+                      delay.name,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
+                  Text(delay.endStation),
+                ],
+              ),
             ),
             Expanded(
-              child: Row(
+              flex: 1,
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  Text('Przyjazd'),
+                  Row(
                     children: [
-                      Text('Przyjazd'),
-                      Row(
-                        children: [
-                          Text(delay.arrivalTime),
-                          Text(' (+' + delay.arrivalDelay + ')'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text('Odjazd'),
-                      Row(
-                        children: [
-                          Text(delay.leavingTime),
-                          Text(' (+' + delay.leavingDelay + ')'),
-                        ],
-                      ),
+                      Text(delay.arrivalTime),
+                      Text(' (+' + delay.arrivalDelay + ')'),
                     ],
                   ),
                 ],
               ),
-            )
+            ),
+            Expanded(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text('Odjazd'),
+                  Row(
+                    children: [
+                      Text(delay.leavingTime),
+                      Text(' (+' + delay.leavingDelay + ')'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
