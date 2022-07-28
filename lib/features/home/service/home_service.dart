@@ -47,13 +47,16 @@ class HomeService {
   }
 
   Future<Either<Failure, Transfers>> getTransfers(
-      String startStation, String endStataion, String date, String time) async {
+      String startStation, String endStation, String date, String time) async {
     try {
-      String url =
-          '$baseUrl/${_rebuildStaiton(startStation)}/${_rebuildStaiton(endStataion)}/$date/$time';
-      log('link = $url');
-      Response res =
-          await client.dio.get(url, options: Options(receiveTimeout: 15000));
+      String url = '$baseUrl/transfers';
+      Response res = await client.dio
+          .post(url, options: Options(receiveTimeout: 15000), data: {
+        "startStation": startStation,
+        "endStation": endStation,
+        "date": date,
+        "time": time
+      });
       var string = jsonEncode(res.data['data']);
       return Right(Transfers.fromJson(string));
     } catch (e) {
