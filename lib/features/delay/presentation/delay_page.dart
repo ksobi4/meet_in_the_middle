@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mitm4/core/theme.dart';
 import 'package:mitm4/features/delay/bloc/events_delay_bloc.dart';
@@ -14,7 +12,6 @@ import 'package:mitm4/features/delay/service/delay_service.dart';
 import '../../../core/get_it.dart';
 import '../../home/presentation/widgets/input/custom_text_field.dart';
 import '../bloc/delay_bloc.dart';
->>>>>>> delayBranch
 
 class DelayPage extends StatefulWidget {
   const DelayPage({Key? key}) : super(key: key);
