@@ -36,18 +36,6 @@ class _DelayPageState extends State<DelayPage> {
     return Scaffold(
       body: SafeArea(
           child: Column(
-<<<<<<< HEAD
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text('Delay page'),
-              // TextButton(
-              //     onPressed: () {
-              //       DelayService ds = sl<DelayService>();
-              //       ds.getDelaiedTrainsForStaion('');
-              //     },
-              //     child: const Text('test btn'))
-            ],
-=======
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
@@ -63,7 +51,6 @@ class _DelayPageState extends State<DelayPage> {
                 });
               }
             })),
->>>>>>> delayBranch
           ),
           Expanded(child: pages[pageIndex]),
         ],
