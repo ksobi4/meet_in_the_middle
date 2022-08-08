@@ -1,12 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:mitm4/core/theme.dart';
 
+import 'core/get_it.dart';
 import 'core/widgets/custom_animated_bottom_bar.dart';
 import 'features/chat/presentation/chat_home_page.dart';
 import 'features/delay/presentation/delay_page.dart';
+import 'features/home/blocs/transfers_bloc/transfers_bloc.dart';
+import 'features/home/model/transfers.dart';
 import 'features/home/presentation/home_page.dart';
+import 'features/home/presentation/widgets/input/custom_text_field.dart';
 import 'features/profile/presentation/profile_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -29,8 +34,9 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _getBody() {
-    List<Widget> pages = const [
+    List<Widget> pages = [
       HomePage(),
+      // SliverDemo(),
       DelayPage(),
       ChatHomePage(),
       ProfilePage(),

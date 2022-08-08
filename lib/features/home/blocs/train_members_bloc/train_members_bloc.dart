@@ -5,10 +5,10 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mitm4/core/models/user.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../model/transfers.dart';
-import '../../model/user.dart';
 import '../../service/home_service.dart';
 
 part 'train_members_bloc.freezed.dart';

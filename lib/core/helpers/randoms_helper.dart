@@ -1,7 +1,7 @@
 import 'dart:math';
 //import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
 
-abstract class Helpers {
+abstract class RandomsHelper {
   static final random = Random();
 
   static String randomPictureUrl() {

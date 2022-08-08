@@ -7,13 +7,13 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mitm4/core/errors/failure.dart';
+import 'package:mitm4/core/models/user.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../core/config/config.dart';
 import '../../../core/http_client.dart';
 import '../model/train_event.dart';
 import '../model/transfers.dart';
-import '../model/user.dart';
 
 class HomeService {
   HttpClient client;

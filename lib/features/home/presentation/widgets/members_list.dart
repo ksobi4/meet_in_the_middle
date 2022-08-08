@@ -1,9 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:mitm4/core/models/user.dart';
 import 'package:mitm4/features/home/presentation/widgets/member.dart';
-
-import '../../model/user.dart';
 
 class MembersList extends StatelessWidget {
   List<User> userList;

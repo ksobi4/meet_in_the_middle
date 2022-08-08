@@ -13,8 +13,8 @@ class CustomDelayCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      decoration: BoxDecoration(
-        border: const Border(
+      decoration: const BoxDecoration(
+        border: Border(
             top: BorderSide(
           color: AppColors.accent,
           width: 1,
@@ -31,12 +31,17 @@ class CustomDelayCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(delay.trainNumber),
-                  FittedBox(
-                    child: Text(
-                      delay.name,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
+                  // FittedBox(
+                  //   child: Text(
+                  //     delay.name,
+                  //     overflow: TextOverflow.ellipsis,
+                  //     maxLines: 1,
+                  //   ),
+                  // ),
+                  Text(
+                    delay.name,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   Text(delay.endStation),
                 ],

@@ -12,8 +12,8 @@ import 'package:mitm4/features/home/presentation/widgets/member.dart';
 
 import '../../../core/get_it.dart';
 import '../../../core/theme.dart';
+import '../blocs/is_event_member_bloc/is_event_member_bloc.dart';
 import '../service/home_service.dart';
-import 'is_event_member_bloc/is_event_member_bloc.dart';
 import 'widgets/members_list.dart';
 
 class EventPage extends StatefulWidget {

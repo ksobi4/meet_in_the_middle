@@ -18,18 +18,17 @@ class TransfersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    for (Transfer trans in transfers.transfers) {
-      if (trans.trains.length > 3) {
-        transfers.transfers.remove(trans);
-      }
-    }
-    return Expanded(
-      child: ListView.builder(
-          itemCount: transfers.transfers.length,
-          itemBuilder: ((context, index) {
-            return OneTransferWidget(transfer: transfers.transfers[index]);
-          })),
-    );
+    List<Transfer> temp = transfers.transfers;
+    // for (Transfer trans in temp) {
+    //   if (trans.trains.length > 3) {
+    //     transfers.transfers.remove(trans);
+    //   }
+    // }
+    return ListView.builder(
+        itemCount: transfers.transfers.length,
+        itemBuilder: ((context, index) {
+          return OneTransferWidget(transfer: transfers.transfers[index]);
+        }));
   }
 }
 
@@ -51,7 +50,7 @@ class OneTransferWidget extends StatelessWidget {
             transfer: transfer,
           ),
           //expandedColor: Colors.grey[800],
-          baseColor: AppColors.darkNavBarBg,
+          baseColor: Color.fromARGB(255, 46, 68, 85),
           children: [ExnandedTaileBody(transfer: transfer)],
         ));
   }
@@ -237,6 +236,12 @@ Row _generateTransfer(Transfer trs) {
         ],
       ),
     ));
+  }
+
+  if (list.length > 3) {
+    list = [
+      Text('Ponad 3 pociągi'),
+    ];
   }
 
   return Row(children: list);

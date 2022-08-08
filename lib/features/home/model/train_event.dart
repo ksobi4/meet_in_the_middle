@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-import 'user.dart';
+import 'package:mitm4/core/models/user.dart';
+
+// import 'user.dart';
 
 class TrainEvent {
   User author;

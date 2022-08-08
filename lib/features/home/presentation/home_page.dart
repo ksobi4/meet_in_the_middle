@@ -10,10 +10,10 @@ import 'package:mitm4/core/router/router.gr.dart';
 import 'package:mitm4/core/theme.dart';
 import 'package:mitm4/core/widgets/loading_widget.dart';
 import 'package:mitm4/features/firstpath/presentation/firstScreen.dart';
-import 'package:mitm4/features/home/presentation/user_trains_bloc/user_trains_bloc.dart';
 import 'package:mitm4/features/home/presentation/widgets/transfers_list.dart';
 
 import '../../../core/get_it.dart';
+import '../blocs/user_trains_bloc/user_trains_bloc.dart';
 import '../model/transfers.dart';
 
 class HomePage extends StatefulWidget {

@@ -2,9 +2,9 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:mitm4/core/models/user.dart';
 
 import '../../../../core/router/router.gr.dart';
-import '../../model/user.dart';
 
 class MemberWidget extends StatelessWidget {
   User user;

@@ -4,15 +4,15 @@ import 'package:hive/hive.dart';
 import 'package:mitm4/features/auth/service/auth_local_service.dart';
 import 'package:mitm4/features/auth/service/auth_service.dart';
 import 'package:mitm4/features/delay/bloc/delay_bloc.dart';
-import 'package:mitm4/features/home/presentation/is_event_member_bloc/is_event_member_bloc.dart';
-import 'package:mitm4/features/home/presentation/is_train_in_db_bloc/is_train_in_db_bloc.dart';
-import 'package:mitm4/features/home/presentation/is_train_member_bloc/is_train_member_bloc.dart';
-import 'package:mitm4/features/home/presentation/user_trains_bloc/user_trains_bloc.dart';
 import 'package:mitm4/features/home/service/home_service.dart';
 import '../features/delay/service/delay_service.dart';
-import '../features/home/presentation/train_events_bloc/train_events_bloc.dart';
-import '../features/home/presentation/train_members_bloc/train_members_bloc.dart';
-import '../features/home/presentation/transfers_bloc/transfers_bloc.dart';
+import '../features/home/blocs/is_event_member_bloc/is_event_member_bloc.dart';
+import '../features/home/blocs/is_train_in_db_bloc/is_train_in_db_bloc.dart';
+import '../features/home/blocs/is_train_member_bloc/is_train_member_bloc.dart';
+import '../features/home/blocs/train_events_bloc/train_events_bloc.dart';
+import '../features/home/blocs/train_members_bloc/train_members_bloc.dart';
+import '../features/home/blocs/transfers_bloc/transfers_bloc.dart';
+import '../features/home/blocs/user_trains_bloc/user_trains_bloc.dart';
 import './config/config.dart' as config;
 import 'http_client.dart';
 
@@ -40,4 +40,6 @@ Future<void> setupGetIt() async {
   sl.registerLazySingleton<Box>(() => Hive.box(config.hiveBoxName));
 
   sl.registerLazySingleton<HttpClient>(() => HttpClient());
+
+  // sl.registerLazySingleton(() => null)
 }

@@ -9,17 +9,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:mitm4/core/theme.dart';
 import 'package:mitm4/core/widgets/loading_widget.dart';
-import 'package:mitm4/features/home/presentation/is_train_member_bloc/is_train_member_bloc.dart';
 import 'package:mitm4/features/home/presentation/widgets/events_list.dart';
 import 'package:mitm4/features/home/presentation/widgets/members_list.dart';
 
 import '../../../core/get_it.dart';
 import '../../../core/router/router.gr.dart';
+import '../blocs/is_train_in_db_bloc/is_train_in_db_bloc.dart';
+import '../blocs/is_train_member_bloc/is_train_member_bloc.dart';
+import '../blocs/train_events_bloc/train_events_bloc.dart';
+import '../blocs/train_members_bloc/train_members_bloc.dart';
 import '../model/transfers.dart';
 import '../service/home_service.dart';
-import 'is_train_in_db_bloc/is_train_in_db_bloc.dart';
-import 'train_events_bloc/train_events_bloc.dart';
-import 'train_members_bloc/train_members_bloc.dart';
 
 class TrainPage extends StatelessWidget {
   Train train;

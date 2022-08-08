@@ -1,9 +1,9 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:mitm4/core/helpers/randoms_helper.dart';
 
 import '../../../core/theme.dart';
-import '../../helpers.dart';
 import '../model/message_data.dart';
 import '../model/story_data.dart';
 import 'chat_screen.dart';
@@ -26,14 +26,14 @@ class HomeScreen extends StatelessWidget {
 
   Widget _delegate(BuildContext context, int index) {
     final Faker faker = Faker();
-    final date = Helpers.randomDate();
+    final date = RandomsHelper.randomDate();
     return _MessageTitle(
       messageData: MessageData(
         senderName: faker.person.name(),
         message: faker.lorem.sentence(),
         messageDate: date,
         dataMessage: Jiffy(date).fromNow(),
-        profilePicture: Helpers.randomPictureUrl(),
+        profilePicture: RandomsHelper.randomPictureUrl(),
       ),
     );
   }
@@ -138,7 +138,7 @@ class _Stories extends StatelessWidget {
                           child: _StoryCard(
                             storyData: StoryData(
                               name: faker.person.firstName(),
-                              url: Helpers.randomPictureUrl(),
+                              url: RandomsHelper.randomPictureUrl(),
                             ),
                           ),
                         ),
